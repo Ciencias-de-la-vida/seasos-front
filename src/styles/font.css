@@ -1,42 +1,42 @@
 @font-face {
   font-display: swap;
   font-style: normal;
-  src: url("/fonts/PoppinsBold.ttf");
+  src: url("/public/fonts/PoppinsBold.ttf");
   font-family: "Poppins";
   font-weight: 700;
 }
 @font-face {
   font-display: swap;
   font-style: normal;
-  src: url("/fonts/RubikBold.ttf");
+  src: url("/public/fonts/RubikBold.ttf");
   font-family: "Rubik";
   font-weight: 700;
 }
 @font-face {
   font-display: swap;
   font-style: normal;
-  src: url("/fonts/RubikRegular.ttf");
+  src: url("/public/fonts/RubikRegular.ttf");
   font-family: "Rubik";
   font-weight: 400;
 }
 @font-face {
   font-display: swap;
   font-style: normal;
-  src: url("/fonts/PoppinsMedium.ttf");
+  src: url("/public/fonts/PoppinsMedium.ttf");
   font-family: "Poppins";
   font-weight: 500;
 }
 @font-face {
   font-display: swap;
   font-style: normal;
-  src: url("/fonts/RubikBlack.ttf");
+  src: url("/public/fonts/RubikBlack.ttf");
   font-family: "Rubik";
   font-weight: 900;
 }
 @font-face {
   font-display: swap;
   font-style: normal;
-  src: url("/fonts/RubikMedium.ttf");
+  src: url("/public/fonts/RubikMedium.ttf");
   font-family: "Rubik";
   font-weight: 500;
 }

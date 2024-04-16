@@ -1,0 +1,128 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif; 
+    box-sizing: border-box;
+}
+
+.containerL{
+    width: 100%;
+    height: 100vh;
+    
+    background-image: linear-gradient(rgba(0, 0, 50, 0.485),rgba(0, 0, 50, 0.611)), url(../../public/images/login-bg.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+.form-box{
+    width: 90%;
+    max-width: 450px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff31;
+    padding: 50px 60px 70px;
+    text-align: center;
+    border-radius: 30px;
+}
+
+.form-box h1{
+    font-size: 30px;
+    margin-bottom: 60px;
+    color: #edebf1;
+    position: relative;
+}
+
+.form-box h1::after{
+    content: '';
+    width: 30px;
+    height: 4px;
+    border-radius: 3px;
+    background: #cdc9d3;
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.input-field{
+    background: #eaeaea;
+    margin: 15px 0;
+    width: 90%;
+    border-radius: 20px !important;
+    display: flex;
+    align-items: center;
+    max-height: 65px;
+    transition: max-height 0.5s;
+    overflow: hidden;
+}
+
+input{
+    width: 100%;
+    border-radius: 20px;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    padding: 18px 15px;
+}
+
+.input-field i{
+    margin-left: 15px;
+    color: #999;
+}
+
+.btn-field{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-field button{
+    flex-basis: 48%;
+    background: #7fffd4;
+    color: #020202;
+    height: 40px;
+    border-radius: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: background 1s;
+}
+
+.btn-fieldR{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px; 
+    margin-top: 50px;
+}
+
+.btn-fieldR button{
+    width: 48%;
+    max-width: 200px;
+    background: #7fffd4;
+    color: #020202;
+    height: 40px;
+    border-radius: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: background 1s;
+}
+
+
+.input-group{
+    height: 250px;
+}
+
+.btn-field button.disable{
+    background: #eaeaea;
+    color: #555;
+}
+
+#nameField {
+    max-height: 0;
+    overflow: hidden;
+}

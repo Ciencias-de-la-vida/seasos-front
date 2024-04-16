@@ -1,34 +1,73 @@
 import { Sidebar } from 'components/Nav/Sidebar'
 import React from 'react'
 import { useParams } from 'react-router-dom';
+import axios from 'axios'
+import { useState, useEffect } from 'react';
+import { apiAnimals } from "./apiAnimals";
+import "../../styles/animal.css";
+
+
 
 export const Animal = () => {
-  // const { id } = useParams();
-  // console.log(id)
+
+  const { id } = useParams();
+   console.log(id)
+  const URL = `https://api-rest-python-six.vercel.app/get/animals`
+
+
+  const [animals, setAnimals] = useState([])
+  const[animal, setAnimal] = useState([])
+
+  const fetchData = async()=>{
+    try {
+      const response = await apiAnimals()
+      console.log(response)
+      setAnimals(response)
+      const animalEncontrado = response.find(animal => animal._id === id);
+      setAnimal(animalEncontrado);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
+  console.log(animal)
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+   
   return (
     <>
-      <div className="row">
-        <div className="col-md-2">
+      <div className="flex">
+        
           <Sidebar />
-        </div>
-        <div className="col-md-10" >
+        
           <div className="container mt-5">
-              <div className="d-flex align-items-center justify-content-center">
-                <div className="animal-image">
-                  <img src="https://static.nationalgeographic.es/files/styles/image_3200/public/21574.600x450.jpg?w=1900&h=1425" alt="..." />
-                </div>
-                </div>
-                <div className="">
-                  <h2 className="mt-4" style={{ color: 'black', fontSize: "25px", fontWeight: "bold", textAlign: "center" }}>Foca</h2>
-                  <p className="mt-1" style={{ color: 'black', fontSize: "15px", fontWeight: "bold", textAlign: "center" }}>
-                  Phocidae
-                  </p>
-                  <p className="mt-2" style={{color: 'black', fontSize: "15px", textAlign: "center", width:"100ch", marginLeft: "10%" }}>Los fócidos o focas verdaderas (Phocidae) son una familia de mamíferos pinnípedos adaptados a vivir en medios acuáticos la mayor parte del tiempo. El nombre común deriva directamente del latín phoca, que a su vez tiene su origen en el griego φώκη (phṓkē).
-                  Se conocen 33 especies. Carecen de pabellón auditivo y sus extremidades posteriores están dirigidas hacia atrás y no son funcionales en el desplazamiento terrestre, característica que los diferencia de los otáridos (lobos y osos marinos).</p>
-                </div>
-            </div>
-          </div>
+      <div className="card-container">
+        <div className="hero-image-container">
+          <img src={animal.img} alt="Animal" />
+          <div className="overlay"></div>
         </div>
+        <div className="content">
+          <h1>{animal.nombre}</h1>
+          <h2>{animal.cientifico}</h2>
+          <p>
+            Región: {animal.region}
+          </p>
+          <p>
+            Longitud: {animal.longitud}
+          </p>
+          <p>
+            Latitud: {animal.latitud}
+          </p>
+        </div>
+      </div>
+    </div>
+        </div>
+
+
+        
       </>
       )
 }
