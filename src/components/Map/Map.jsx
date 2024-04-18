@@ -5,6 +5,18 @@ import { markersData } from "../../mocks/regions";
 import { Sidebar } from "../Nav/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { apiAnimals } from "./apiAnimals";
+import { Search } from "./Search";
+
+export const MyIcon = L.icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+
 
 export const Map = ({ currentLocation }) => {
 const [animals, setAnimals] = useState([])
@@ -35,31 +47,27 @@ const [animals, setAnimals] = useState([])
     map.setView(center, map.getZoom());
     return null;
   };
-  const maxBounds = [
-    [-200,0],
-    [200,0]
-  ]
 
   return (
     <>
-     
     <div className="flex">
       <div style={{width: "50px", margin:"30px"} }>
             <Sidebar />
       </div>
         <div className="col-md-12" >
+          
           <div style={{ display: "flex", height: "100vh", width: "100%" }}>
             <MapContainer center={[currentLocation.latitud, currentLocation.longitud]}
-            maxBounds={maxBounds} zoom={2} style={{ flex: "1" }}>
+            zoom={2} style={{ flex: "1" }} zoomControl={false}>
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; OpenStreetMap contributors"
               />
 
               <MapCenter center={[currentLocation.latitud, currentLocation.longitud]} />
-
+Q
               {animals.map((marker, index) => (
-                <Marker key={index} position={[marker.latitud, marker.longitud]}>
+                <Marker key={index} position={[marker.latitud, marker.longitud]} icon={MyIcon}>
                   <Popup>
                     <h1 style={{ color: 'black', fontSize: "18px", fontWeight: "bold", textAlign: "center" }} className="mt-4">
                       <strong>{marker.nombre}</strong>
@@ -78,6 +86,9 @@ const [animals, setAnimals] = useState([])
                 </Marker>
               ))}
             </MapContainer>
+            <div className="search-container" style={{ position: "absolute", top: "20px", left: "50%", transform: "translateX(-50%)", zIndex: 1000 }}>
+        <Search />
+      </div>
           </div>
         </div>
       </div>

@@ -39,10 +39,10 @@ export default function LandingpagePage() {
             <Link to="/map" style={{textDecoration:"none"}}>
               <Button className="font-poppins min-w-[141px] mt-3" href="/map">Explora en el mapa</Button>
               </Link>
-              <div className="flex flex-col items-center justify-start w-1/4 mt-[-30px]">
+              <div className="flex flex-col items-center justify-start w-1/4 mt-[-15%]">
                 <div className="flex flex-row justify-center w-full">
                   <div className="flex flex-row justify-center w-full p-[21px] bg-gradient">
-                    <div className="flex flex-col items-start justify-start w-[89%] mb-0.5 gap-1 mx-[13px]">
+                    <div className="flex flex-col items-start justify-start w-[89 gap-1 mx-[13px]">
                       <Heading as="h3" className="!text-[18.73px]">
                         Unete
                       </Heading>
@@ -58,7 +58,7 @@ export default function LandingpagePage() {
                 <Button
                   size="sm"
                   rightIcon={<Img src="images/img_group_4.svg" alt="Group 4" />}
-                  className="w-full gap-[15px]"
+                  className="w-full gap-[15px] mt-[-12%]"
                 >
                   Participa Aquí
                 </Button>
