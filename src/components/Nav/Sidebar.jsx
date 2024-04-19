@@ -28,7 +28,7 @@ export const Sidebar = () => {
                     <nav>
                         {isLogged ? 
                             navItemsAdmin.map((item,index) => (
-                                <Link to={navLinksAdmin[index]} className="button-link" >
+                                <Link to={navLinksAdmin[index]} className="button-link mt-5" >
                                 <button key ={item} type="button">
                                     <span className='icon'>
                                        <i className={navIconsAdmin[index]}></i>

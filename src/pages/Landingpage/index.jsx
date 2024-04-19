@@ -55,7 +55,7 @@ export default function LandingpagePage() {
                     <Button
                       size="sm"
                       rightIcon={<Img src="images/img_group_4.svg" alt="Group 4" />}
-                      className="w-full gap-[15px] mt-[-12%]"
+                      className="w-full gap-[15px] mt-[-10%]"
                     >
                       Participa Aquí
                     </Button>

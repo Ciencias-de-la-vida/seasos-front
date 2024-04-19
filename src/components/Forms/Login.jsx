@@ -50,6 +50,12 @@ export const Login =()=> {
     try {
       const response = await axios.post('https://api-rest-python-six.vercel.app/login', credentials);
       console.log("STATUS", response.status)
+      if(response.status == 200){
+        localStorage.setItem("isLogged", true)
+        navigate("/animalT")
+      }else{
+        localStorage.setItem("isLogged", false)
+      }
     } catch (err) {
       console.log(err)
       alert("Error al iniciar sesión: " + err.response.data.message);
