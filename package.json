@@ -5,6 +5,7 @@
   "dependencies": {
     "@nextui-org/system": "^2.1.2",
     "@nextui-org/theme": "^2.2.2",
+    "@react-google-maps/api": "^2.19.3",
     "@tailwindcss/forms": "^0.5.7",
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^11.2.7",
@@ -12,6 +13,8 @@
     "axios": "^1.6.8",
     "dotenv": "^16.0.1",
     "framer-motion": "^11.1.5",
+    "heatmap.js": "^2.0.5",
+    "leaflet.heat": "^0.2.0",
     "mdb-react-ui-kit": "^7.2.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",

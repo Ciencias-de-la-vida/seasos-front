@@ -1,44 +1,57 @@
+import React, { useEffect, useState } from "react";
+import { MapContainer, TileLayer, Circle } from "react-leaflet";
+import { apiAnimals } from 'components/Map/apiAnimals';
+import { Sidebar } from "components/Nav/Sidebar";
 
-import { Chart } from "react-google-charts";
+export const HeatMap = ({ currentLocation }) => {
+  const [animals, setAnimals] = useState([]);
 
-export const data = [
-  ["Country", "Popularity"],
-  ["Germany", 200],
-  ["United States", 300],
-  ["Brazil", 400],
-  ["Canada", 500],
-  ["France", 600],
-  ["RU", 700],
-  ["Guatemala", 1200],
-];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await apiAnimals();
+        setAnimals(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-export const HeatMap = () => {
+    fetchData();
+  }, []);
+
+  const getColor = (distance) => {
+    if (distance <= 1000) {
+      return "yellow";
+    } else if (distance <= 9000) {
+      return "orange";
+    } else {
+      return "red";
+    }
+  };
+
   return (
-    <Chart
-      chartEvents={[
-        {
-          eventName: "select",
-          callback: ({ chartWrapper }) => {
-            const chart = chartWrapper.getChart();
-            const selection = chart.getSelection();
-            if (selection.length === 0) return;
-            const region = data[selection[0].row + 1];
-            console.log("Selected : " + region);
-          },
-        },
-      ]}
-      chartType="GeoChart"
-      width="100%"
-      height="300px"
-      data={data}
-      options={{
-        region: "world",
-        displayMode: "regions",
-        colorAxis: { colors: ["red", "yellow", "green"] },
-        backgroundColor: "white",
-        datalessRegionColor: "gray",
-        defaultColor: "#f5f5f5",
-      }}
-    />
+    <>
+    <Sidebar/>
+    <div style={{ height: '100vh' }}>
+      <MapContainer center={[currentLocation.latitud, currentLocation.longitud]} zoom={2} style={{ height: '100%' }}>
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; OpenStreetMap contributors" />
+
+        {animals.map((animal, index) => {
+          const { latitud, longitud } = animal;
+          const distance = Math.sqrt((latitud - currentLocation.latitud) ** 4 + (longitud - currentLocation.longitud) ** 4);
+
+          return (
+            <Circle
+              key={index}
+              center={[latitud, longitud]}
+              radius={800000}
+              pathOptions={{ color: getColor(distance), opacity: 0 }}
+            />
+          );
+        })}
+      </MapContainer>
+    </div>
+    </>
   );
-}
+};
+
