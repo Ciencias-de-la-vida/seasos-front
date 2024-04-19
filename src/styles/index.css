@@ -104,3 +104,144 @@ ul {
   border:none;
   margin:none;
 }
+
+.counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.counter h3 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.counter p {
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  background-color: #003366;
+  padding: 50px;
+  color: white !important;
+  border-radius: 8px;
+  width: 350px;
+  text-align: center;
+}
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 85%;
+  border-radius: 5%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 25vh;
+  height: 25vh;
+  border-radius: 5%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.overlay-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 5px;
+}
+
+.overlay-text2 {
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+}
+
+.image-container:hover .overlay {
+  opacity: 1;
+}
+
+#navbarLanding{
+  background-color: transparent !important;
+  backdrop-filter: blur(0px) !important;
+  border-bottom-color: transparent !important;
+}
+
+.ov-btn-grow-ellipse:hover {
+  color: #fff;
+}
+
+.ov-btn-grow-ellipse {
+  background: #0c5599 !important;
+  padding: 10px 12px !important;
+  border-radius: 10px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.ov-btn-grow-ellipse::after {
+  content: "";
+  background: #082c50;
+  position: absolute;
+  z-index: -1;
+  padding: 16px 20px;
+  left: -50%;
+  right: -50%;
+  top: -150%;
+  bottom: -150%;
+  transform: scale(0, 0);
+  transition: all 0.4s ease;
+}
+
+.ov-btn-grow-ellipse:hover::after {
+  transition: all 0.6s ease-out;
+  transform: scale(1, 1);
+}
+
+.popover-container {
+  position: relative;
+  margin-top: -2%;
+  margin-left: 33.5%;
+  width: 48%;
+  text-decoration: none !important;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: none;
+  overflow: scroll !important;
+  height: 400px !important;
+}
+
+.popover-content h1 {
+  text-decoration: none !important;
+}
+
+#busqueda{
+  text-decoration: none !important;
+}
+
+#busqueda:hover {
+  background-color: #bebebe31;
+}

@@ -1,6 +1,11 @@
+const {nextui} = require("@nextui-org/react");
+
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   mode: "jit",
-  content: ["./src/**/**/*.{js,ts,jsx,tsx,html,mdx}", "./src/**/*.{js,ts,jsx,tsx,html,mdx}"],
+  content: ["./src/**/**/*.{js,ts,jsx,tsx,html,mdx}",
+   "./src/**/*.{js,ts,jsx,tsx,html,mdx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
   theme: {
     screens: { md: { max: "1050px" }, sm: { max: "550px" } },
@@ -15,5 +20,6 @@ module.exports = {
       backgroundImage: { gradient: "linear-gradient(148deg, #ffffff7f,#ffffff00)" },
     },
   },
-  plugins: [require("@tailwindcss/forms")],
+  darkMode: "class",
+  plugins: [nextui() ],
 };
