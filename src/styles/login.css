@@ -8,8 +8,7 @@
 .containerL{
     width: 100%;
     height: 100vh;
-    
-    background-image: linear-gradient(rgba(0, 0, 50, 0.485),rgba(0, 0, 50, 0.611)), url(../../public/images/login-bg.jpg);
+    background-image: url("https://images.pexels.com/photos/3678323/pexels-photo-3678323.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
     background-position: center;
     background-size: cover;
     position: relative;
@@ -22,15 +21,16 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #ffffff31;
-    padding: 50px 60px 70px;
+    background: #bbbbbb46;
+    padding: 10px 50px 50px;
     text-align: center;
     border-radius: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .form-box h1{
     font-size: 30px;
-    margin-bottom: 60px;
+    margin-bottom: -10px;
     color: #edebf1;
     position: relative;
 }
@@ -49,7 +49,7 @@
 
 .input-field{
     background: #eaeaea;
-    margin: 15px 0;
+    margin: 5px 5px !important;
     width: 90%;
     border-radius: 20px !important;
     display: flex;
@@ -70,6 +70,7 @@ input{
 
 .input-field i{
     margin-left: 15px;
+    margin-right: 10px;
     color: #999;
 }
 
@@ -115,6 +116,7 @@ input{
 
 .input-group{
     height: 250px;
+    margin: 5px 5px;
 }
 
 .btn-field button.disable{

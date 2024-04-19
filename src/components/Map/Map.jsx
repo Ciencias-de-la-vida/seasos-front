@@ -58,7 +58,7 @@ const [animals, setAnimals] = useState([])
           
           <div style={{ display: "flex", height: "100vh", width: "100%" }}>
             <MapContainer center={[currentLocation.latitud, currentLocation.longitud]}
-            zoom={2} style={{ flex: "1" }} zoomControl={false}>
+            zoom={15} style={{ flex: "1" }} zoomControl={false}>
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; OpenStreetMap contributors"

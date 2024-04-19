@@ -33,7 +33,7 @@ export const HeatMap = ({ currentLocation }) => {
     <>
     <Sidebar/>
     <div style={{ height: '100vh' }}>
-      <MapContainer center={[currentLocation.latitud, currentLocation.longitud]} zoom={2} style={{ height: '100%' }}>
+      <MapContainer center={[currentLocation.latitud, currentLocation.longitud]} zoom={2} zoomControl={false} style={{ height: '100%' }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; OpenStreetMap contributors" />
 
         {animals.map((animal, index) => {

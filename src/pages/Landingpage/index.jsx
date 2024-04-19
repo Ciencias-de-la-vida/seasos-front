@@ -24,7 +24,7 @@ export default function LandingpagePage() {
           <div className="flex flex-row justify-center w-full h-full pl-[69px] pr-14 left-0 bottom-0 right-0 top-0 py-[69px] md:m-auto bg-black-900_59 absolute">
             <div className="flex flex-col items-start justify-start w-full ml-6 max-w-[1247px] mt-12 ">
 
-              <div className="h-px w-full  ml-[5px]  " />
+              <div className="h-px w-full  ml-[5px] mt-[5%]" />
               <Heading size="md" as="h2" className="w-[50%] ml-[3px]">
                 El Tesoro de <br />la Vida Marina
               </Heading>

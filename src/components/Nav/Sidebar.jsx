@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "../../styles/sidebar.css";
 
-const navItems = [ "Mapa", "Mapa de calor", "Sugerir especie", "Home"]
+const navItems = [ "Mapa", "Mapa de calor", "Sugiere", "Home"]
 const navItemsAdmin = ["Usuarios", "Animales", "Home"]
 const navLinks = ["/map", "/heatmap", "/form", "/"]
 const navLinksAdmin = ["/userT", "/animalT", "/"]
@@ -20,7 +20,7 @@ export const Sidebar = () => {
                     <header>
                         <button type='button' className='sidebar-burger' onClick={() => setIsOpen(!isOpen)}>
                             <span className='icon'>
-                                {isOpen ? <i className='fa fa-chevron-left'></i> : <i className='fa fa-bars'></i>}
+                                {isOpen ? <i className='fa fa-bars'></i> : <i className='fa fa-bars'></i>}
                             </span>
                         </button>
                         

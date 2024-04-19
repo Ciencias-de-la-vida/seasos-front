@@ -1,73 +1,117 @@
-import { Sidebar } from 'components/Nav/Sidebar'
-import React from 'react'
+import { Sidebar } from 'components/Nav/Sidebar';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios'
-import { useState, useEffect } from 'react';
 import { apiAnimals } from "./apiAnimals";
 import "../../styles/animal.css";
-
-
+import { Configuration, OpenAIApi } from "openai";
+import { Heading } from 'components';
 
 export const Animal = () => {
-
   const { id } = useParams();
-   console.log(id)
-  const URL = `https://api-rest-python-six.vercel.app/get/animals`
 
+  const [animal, setAnimal] = useState(null);
+  const [result, setResult] = useState("");
+  const [result2, setResult2] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const [animals, setAnimals] = useState([])
-  const[animal, setAnimal] = useState([])
-
-  const fetchData = async()=>{
-    try {
-      const response = await apiAnimals()
-      console.log(response)
-      setAnimals(response)
-      const animalEncontrado = response.find(animal => animal._id === id);
-      setAnimal(animalEncontrado);
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const configuration = new Configuration({
+    apiKey: "sk-proj-DKBrAd0IagEFGTrZzFy0T3BlbkFJ15QncAPeMvYMy836MI9x"
+  });
   
-  console.log(animal)
-
   useEffect(() => {
-    fetchData()
-  }, [])
+    const fetchData = async () => {
+      try {
+        const response1 = await apiAnimals();
+        const animalEncontrado = response1.find(animal => animal._id === id);
+        setAnimal(animalEncontrado);
 
-   
+        const openai = new OpenAIApi(configuration);
+
+        const prompt = `Dame la descripción de ${animalEncontrado?.nombre} que sea un párrafo de 4-5 líneas`;
+        const prompt2 = `Dame 3 usos que se le da al ${animalEncontrado?.nombre} luego de cazarlo`;
+
+        setLoading(true);
+
+        const response = await openai.createCompletion({
+          model: "gpt-3.5-turbo-instruct",
+          prompt: prompt,
+          temperature: 0.5,
+          max_tokens: 1000,
+        });
+        setResult(response.data.choices[0].text);
+
+        const response2 = await openai.createCompletion({
+          model: "gpt-3.5-turbo-instruct",
+          prompt: prompt2,
+          temperature: 0.5,
+          max_tokens: 1000,
+        });
+
+        const listItems = response2.data.choices[0].text.split('\n').filter(item => item.trim().length > 0);
+        setResult2(listItems);
+
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error.response || error.message || error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
   return (
     <>
-      <div className="flex">
-        
-          <Sidebar />
-        
-          <div className="container mt-5">
-      <div className="card-container">
-        <div className="hero-image-container">
-          <img src={animal.img} alt="Animal" />
-          <div className="overlay"></div>
+      <Sidebar />
+      <div className="row">
+      <div className=""></div>
+      <div className="col-md-12 d-flex align-items-center justify-content-center" >
+        <div className="container mt-5 d-flex align-items-center justify-content-center">
+            <div className="">
+              <div className="animal-image">
+                <img src={animal?.img} alt="..." />
+              </div>
+              </div>
+              <div style={{marginLeft: "10%"}}>
+                <h2 className="mt-4" style={{ color: 'black', fontSize: "35px", fontWeight: "900", textAlign: "center" }}>{animal?.nombre}</h2>
+                <p className="mt-1" style={{ color: 'gray', fontSize: "20px", fontWeight: "400", textAlign: "center" }}>
+                Cientifico: {animal?.cientifico}
+                </p>
+                <p style={{ color: 'gray', fontSize: "15px", fontWeight: "400", textAlign: "center", marginTop: "-5%" }}>
+                Region: {animal?.region}
+                </p>
+              </div>
+          </div>
         </div>
-        <div className="content">
-          <h1>{animal.nombre}</h1>
-          <h2>{animal.cientifico}</h2>
-          <p>
-            Región: {animal.region}
-          </p>
-          <p>
-            Longitud: {animal.longitud}
-          </p>
-          <p>
-            Latitud: {animal.latitud}
-          </p>
+        <div className="col-md-8 mt-5 text-center" style={{marginLeft: "20%"}}>
+          <section style={{ backgroundColor: "#0a2747", padding: "40px" }}>
+            <Heading size="sm" as="h2" className="text-white">
+              Descripción
+            </Heading>
+            <p style={{ color: 'white', fontSize: "15px", fontWeight: "bold", textAlign: "justify", marginTop: "10px" }}>
+              {result}
+            </p>
+          </section>
+        </div>
+        <div className="col-md-8 mt-3 text-center" style={{marginLeft: "20%"}}>
+          <section style={{ backgroundColor: "#fff", padding: "20px" }}>
+            <Heading size="sm" as="h2" className="text-dark">
+              Cazados por
+            </Heading>
+            {result2 && result2.length > 0 ? (
+              <ul style={{ color: 'black', fontSize: "15px", fontWeight: "bold", textAlign: "justify", marginTop: "10px", paddingLeft: "20px" }}>
+                {result2.map((item, index) => (
+                  <li key={index} style={{ marginBottom: "10px" }}>{item}</li>
+                ))}
+              </ul>
+            ) : (
+              <p style={{ color: 'black', fontSize: "15px", fontWeight: "bold", textAlign: "justify", marginTop: "10px" }}>
+                No se encontraron usos específicos después de cazar este animal.
+              </p>
+            )}
+          </section>
         </div>
       </div>
-    </div>
-        </div>
-
-
-        
-      </>
-      )
+    </>
+  );
 }

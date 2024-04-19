@@ -184,7 +184,8 @@ ul {
 #navbarLanding{
   background-color: transparent !important;
   backdrop-filter: blur(0px) !important;
-  border-bottom-color: transparent !important;
+  border-bottom: 0.1px solid white !important;
+  position: relative
 }
 
 .ov-btn-grow-ellipse:hover {
@@ -245,3 +246,4 @@ ul {
 #busqueda:hover {
   background-color: #bebebe31;
 }
+
