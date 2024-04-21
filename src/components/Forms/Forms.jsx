@@ -136,14 +136,15 @@ export const Form = () => {
           <div className='col-lg-8'>
             <div className='card my-2 rounded-3' style={{ width: '80vh' }}>
               <img
-                src='https://florayfaunamarina.com/wp-content/uploads/Flora-y-Fauna-marina.jpg'
+                src='https://images.pexels.com/photos/2832767/pexels-photo-2832767.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
                 className='card-img-top rounded-top'
                 alt='Sample photo'
               />
+              <Heading size="xs" as="h2" className="w-[100%] text-center text-black mt-2 mb-2">
+                        Solicitud de animal
+                    </Heading>
               <div className='card-body px-5'>
-              <Heading size="ms" as="h2" className="w-[100%] text-center text-black">
-            Solicitud de animal
-          </Heading>
+              
                 <form>
                   <div className='row mb-3'>
                     <div className='col'>
