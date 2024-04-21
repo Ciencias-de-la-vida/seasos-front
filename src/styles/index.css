@@ -124,14 +124,14 @@ ul {
 }
 
 
-.cards-container {
+#cards-container {
   display: flex;
   justify-content: center;
   gap: 30px;
   height: 50vh;
 }
 
-.card {
+#card {
   background-color: #003366;
   padding: 50px;
   color: white !important;

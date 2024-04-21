@@ -11,7 +11,9 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^1.6.8",
+    "bootstrap": "^5.3.3",
     "dotenv": "^16.0.1",
+    "firebase": "^10.11.0",
     "framer-motion": "^11.1.5",
     "heatmap.js": "^2.0.5",
     "leaflet.heat": "^0.2.0",
@@ -26,13 +28,15 @@
     "react-google-charts": "^4.0.1",
     "react-helmet": "^6.1.0",
     "react-leaflet": "^4.2.1",
+    "react-paginate": "^8.2.0",
     "react-router-dom": "6.0.2",
     "react-router-hash-link": "^2.4.3",
     "react-scroll": "^1.9.0",
     "react-table": "^7.8.0",
     "react-toastify": "^10.0.5",
     "sonner": "^1.4.41",
-    "sweetalert2": "^11.10.8"
+    "sweetalert2": "^11.10.8",
+    "uuid": "^9.0.1"
   },
   "scripts": {
     "dev": "vite",

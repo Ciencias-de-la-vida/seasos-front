@@ -1,91 +1,216 @@
-import React from 'react';
-import {
-  MDBBtn,
-  MDBContainer,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBRow,
-  MDBCol,
-  MDBInput,
-  MDBRange,
-  MDBFile
-}
-from 'mdb-react-ui-kit';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Sidebar } from 'components/Nav/Sidebar';
+import { MapForm } from './MapForm';
+import { Heading } from 'components';
+import { uploadFiles } from '../../../firebase/config';
+import Swal from 'sweetalert2';
 
-export const Form =()=> {
-  const postAnimal = async(e)=>{
+export const Form = () => {
+  const [inputType, setInputType] = useState('file');
+  const [latLng, setLatLng] = useState(null);
+  const [file, setFile] = useState(null);
+  const [img, setImg] = useState("")
+
+  const uploadImage = async (e) => {
+    e.preventDefault();
     try {
-      e.preventDefault()
-      let newAnimal={
-        nombre: document.getElementById('form1').value,
-        cientifico: document.getElementById('form2').value,
-        region: document.getElementById('form3').value,
-        latitud: document.getElementById('form4').value,
-        longitud: document.getElementById('form5').value,
-        img:  document.getElementById('form6').files[0],
-        status: true
+      if (file) {
+        const result = await uploadFiles(file);
+        if (result) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Imagen Subida!!',
+            text: "Tu imagen fue subida con exito, sigue con el formulario...",
+          });
+          setImg(result);
+        }
+      } else {
+        throw new Error('Se debe seleccionar una imagen');
       }
-      const {data} = await axios.post('https://api-rest-python-six.vercel.app/post/animals', newAnimal)
-      
-      if(data){
-        console.log(data)
-        console.log(data.message)
-      }else{
-        console.log(error)
-      } 
     } catch (error) {
-        console.error(error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: error.message,
+      });
     }
+  };
+
+  const vaciarInputs = () => {
+  window.location.reload()
   }
+
+  const handleInputChange = (e) => {
+    setInputType(e.target.value);
+  };
+
+  const handleLatLngChange = (latLng) => {
+    setLatLng(latLng);
+  };
+
+  const postAnimal = async (e) => {
+    e.preventDefault();
+    const nombre = document.getElementById('form1').value;
+    const cientifico = document.getElementById('form2').value;
+    const region = document.getElementById('form3').value;
+    const lat = latLng?.lat;
+    const lng = latLng?.lng;
+    const imageUrl = inputType === 'file' ? img : document.getElementById('formUrl').value;
+
+    let errorMessage = '';
+
+  if (!nombre) {
+    errorMessage += 'Por favor ingresa el nombre del animal.\n';
+  }
+  if (!cientifico) {
+    errorMessage += 'Por favor ingresa el nombre científico del animal.\n';
+  }
+  if (!region) {
+    errorMessage += 'Por favor ingresa la región donde se ubica el animal.\n';
+  }
+  if (!lat || !lng) {
+    errorMessage += 'Por favor selecciona la ubicación del animal en el mapa.\n';
+  }
+  if (!imageUrl) {
+    errorMessage += 'Por favor selecciona o ingresa una imagen del animal.\n';
+  }
+
+  if (errorMessage) {
+    // Mostrar alerta por cada campo faltante
+    errorMessage.split('\n').forEach((message) => {
+      if (message.trim()) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: message.trim(),
+        });
+      }
+    });
+    return;
+  }
+    try {
+      const newAnimal = {
+        nombre,
+        cientifico,
+        region,
+        latitud: lat,
+        longitud: lng,
+        img: imageUrl,
+        status: true,
+      };
+
+      const { data } = await axios.post('https://api-rest-python-six.vercel.app/post/animals', newAnimal);
+
+      if (data) {
+        if (data) {
+          const alert = Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: 'Petición enviada',
+          });
+          if(alert.isConfirmed()){
+            vaciarInputs()
+          }else{
+            vaciarInputs()
+          }
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: data.message || 'Hubo un problema al enviar la petición',
+          });
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      vaciarInputs()
+    }
+  };
+
   return (
     <>
-    <div className="row">
-    <div className="col-md-2">
-    <Sidebar/>
-    </div>
-    <div className="col-md-10" >
-    <MDBContainer fluid>
-      <MDBRow className='d-flex justify-content-center align-items-center'>
-        <MDBCol lg='8'>
-          <MDBCard className='my-2 rounded-3' style={{maxWidth: '500px',}}>
-            <MDBCardImage src='https://florayfaunamarina.com/wp-content/uploads/Flora-y-Fauna-marina.jpg' className='w-100 rounded-top'  alt="Sample photo"/>
-            <MDBCardBody className='px-5'>
-              <h3 className="mb-4 text-center">Solicitud de animal</h3> 
-              <MDBInput wrapperClass='mb-4' placeholder="Nombre del animal" id='form1' type='text' required/>
-              <MDBRow>
-                <MDBCol md='12'>
-                  <MDBInput wrapperClass=' mb-4' placeholder="Nombre cientifico del animal" id='form2' type='text' required/>
-                </MDBCol>
-                <MDBCol md='12'>
-                  <MDBInput wrapperClass='mb-4' placeholder="Región donde se ubica" id='form3' type='text' required/>
-                </MDBCol>
-                <MDBCol md='12'>
-                  <h6>Latitud</h6>
-                  <MDBRange placeholder="Latitud donde se ubica" name="form4" id='form4' type='range' min="-90" max="90" step="0.0001" required></MDBRange>
-                </MDBCol>
-                <MDBCol md='12' className='gy-3'>
-                  <h6>Longitud</h6>
-                  <MDBRange placeholder="Longitud donde se ubica" name="form5" id='form5' type='range' min="-180" max="180" step="0.0001" required></MDBRange>
-                </MDBCol>
-                <MDBCol md='12' className='gy-3'>
-                  <h6 className='mb-2'>Imagen del animal</h6>
-                  <MDBFile accept='image/*' name="form6" id='form6'></MDBFile>
-                </MDBCol>
-              </MDBRow>
-              <div className="d-flex align-items-center justify-content-center">
-                <button onClick={(e)=>postAnimal(e)}>Hola</button>
-              <MDBBtn color='success' className='mb-4' size='lg'><i className="fa fa-send mx-2" onClick={(e)=>postAnimal(e)}></i>Enviar peticion</MDBBtn>
+      <Sidebar />
+      <div className='container'>
+        <div className='row justify-content-center'>
+          <div className='col-lg-8'>
+            <div className='card my-2 rounded-3' style={{ width: '80vh' }}>
+              <img
+                src='https://florayfaunamarina.com/wp-content/uploads/Flora-y-Fauna-marina.jpg'
+                className='card-img-top rounded-top'
+                alt='Sample photo'
+              />
+              <div className='card-body px-5'>
+              <Heading size="ms" as="h2" className="w-[100%] text-center text-black">
+            Solicitud de animal
+          </Heading>
+                <form>
+                  <div className='row mb-3'>
+                    <div className='col'>
+                      <input type='text' className='form-control' id='form1' placeholder='Nombre del animal' required />
+                    </div>
+                    <div className='col'>
+                      <input type='text' className='form-control' id='form2' placeholder='Nombre cientifico' required />
+                    </div>
+                  </div>
+                  <div className='row mb-3'>
+                    <div className='col'>
+                      <label htmlFor='form3' className='form-label'>
+                        Región donde se ubica
+                      </label>
+                      <input type='text' className='form-control' id='form3' required />
+                    </div>
+                  </div>
+                  <div className='row mb-3'>
+                    <div className='col'>
+                      <label htmlFor='form4' className='form-label'>
+                        Latitud y Longitud
+                      </label>
+                      <div className='container'>
+                        <MapForm onLatLngChange={handleLatLngChange} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className='row mb-3'>
+                    <div className='col'>
+                      <label htmlFor='form6' className='form-label'>
+                        Imagen del animal
+                      </label>
+                      <select className='form-select mb-2' id='form6' onChange={handleInputChange}>
+                        <option value='file'>Subir archivo</option>
+                        <option value='url'>Insertar URL</option>
+                      </select>
+                      {inputType === 'file' ? (
+                        <>
+                          <input
+                           type="file"
+                           className="form-control"
+                           id="form5"
+                           onChange={(e) => setFile(() => e.target.files[0])}
+                           accept=".png, .jpg, .jpeg"
+                          />
+                          <div className="d-grid gap-2">
+                          <button className='btn btn-primary mt-2 ' onClick={(e) => uploadImage(e)}>
+                            <i className="fa fa-file mx-2"></i>Subir Imagen
+                          </button>
+                          </div>
+                        </>
+                      ) : (
+                        <input type='url' className='form-control' id='formUrl' placeholder='Insertar URL' />
+                      )}
+                    </div>
+                  </div>
+                  <div className='d-grid gap-2'>
+                    <button className='btn btn-success btn-lg' type='button' onClick={postAnimal}>
+                      <i className='fa fa-send me-2'></i>Enviar petición
+                    </button>
+                  </div>
+                </form>
               </div>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
-    </div>
-    </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
-}
+};
