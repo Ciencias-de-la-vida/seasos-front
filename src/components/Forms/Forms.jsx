@@ -131,7 +131,7 @@ export const Form = () => {
   return (
     <>
       <Sidebar />
-      <div className='container'>
+      <div className='container mb-4'>
         <div className='row justify-content-center'>
           <div className='col-lg-8'>
             <div className='card my-2 rounded-3' style={{ width: '80vh' }}>
@@ -140,7 +140,7 @@ export const Form = () => {
                 className='card-img-top rounded-top'
                 alt='Sample photo'
               />
-              <Heading size="xs" as="h2" className="w-[100%] text-center text-black mt-2 mb-2">
+              <Heading size="xs" as="h2" className="w-[100%] text-center text-black mt-3 mb-2" style={{fontSize: "25px"}}>
                         Solicitud de animal
                     </Heading>
               <div className='card-body px-5'>
@@ -156,10 +156,7 @@ export const Form = () => {
                   </div>
                   <div className='row mb-3'>
                     <div className='col'>
-                      <label htmlFor='form3' className='form-label'>
-                        Región donde se ubica
-                      </label>
-                      <input type='text' className='form-control' id='form3' required />
+                      <input type='text' className='form-control' id='form3' placeholder='Región donde se ubica' required />
                     </div>
                   </div>
                   <div className='row mb-3'>
