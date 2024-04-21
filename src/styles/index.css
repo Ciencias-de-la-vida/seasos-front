@@ -128,7 +128,7 @@ ul {
   display: flex;
   justify-content: center;
   gap: 30px;
-  height: 50vh;
+  height: 45vh;
 }
 
 #card {
@@ -169,7 +169,7 @@ ul {
   font-size: 14px;
   font-weight: bold;
   color: white;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 .overlay-text2 {
@@ -248,3 +248,8 @@ ul {
   background-color: #bebebe31;
 }
 
+input{
+  padding: 15px;
+  border: 1px gray solid;
+  
+}

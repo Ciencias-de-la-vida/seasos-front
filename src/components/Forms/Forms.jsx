@@ -201,7 +201,7 @@ export const Form = () => {
                     </div>
                   </div>
                   <div className='d-grid gap-2'>
-                    <button className='btn btn-success btn-lg' type='button' onClick={postAnimal}>
+                    <button className='btn btn-success' onClick={postAnimal}>
                       <i className='fa fa-send me-2'></i>Enviar petición
                     </button>
                   </div>
