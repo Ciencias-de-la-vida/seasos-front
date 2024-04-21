@@ -127,7 +127,8 @@ ul {
 .cards-container {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 30px;
+  height: 50vh;
 }
 
 .card {

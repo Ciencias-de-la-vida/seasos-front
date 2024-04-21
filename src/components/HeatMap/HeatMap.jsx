@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Circle } from "react-leaflet";
+import { MapContainer, TileLayer, CircleMarker, Tooltip } from "react-leaflet";
 import { apiAnimals } from 'components/Map/apiAnimals';
 import { Sidebar } from "components/Nav/Sidebar";
 
@@ -19,39 +19,93 @@ export const HeatMap = ({ currentLocation }) => {
     fetchData();
   }, []);
 
-  const getColor = (distance) => {
-    if (distance <= 1000) {
-      return "yellow";
-    } else if (distance <= 9000) {
-      return "orange";
+  const getColorByCount = (count) => {
+    if (count >= 30) {
+      return "red"; // Más de 5 animales
+    } else if (count >= 15) {
+      return "orange"; // Entre 3 y 4 animales
     } else {
-      return "red";
+      return "yellow"; // Menos de 3 animales
+    }
+  };
+
+  const countAnimalsByRegion = () => {
+    const regionCounts = {};
+
+    animals.forEach((animal) => {
+      const { latitud, longitud } = animal;
+      const region = determineRegion(latitud, longitud);
+      if (region) {
+        if (regionCounts[region]) {
+          regionCounts[region].count += 1;
+        } else {
+          regionCounts[region] = {
+            count: 1,
+            coordinates: [latitud, longitud], // Asigna las coordenadas de la región
+          };
+        }
+      }
+    });
+
+    return regionCounts;
+  };
+
+  const determineRegion = (latitud, longitud) => {
+    if (latitud > 0 && longitud > 0) {
+      return "Norte";
+    } else if (latitud < 0 && longitud > 0) {
+      return "Sur";
+    } else if (latitud > 0 && longitud < 0) {
+      return "Este";
+    } else if (latitud < 0 && longitud < 0) {
+      return "Oeste";
+    } else {
+      return null;
     }
   };
 
   return (
     <>
-    <Sidebar/>
-    <div style={{ height: '100vh' }}>
-      <MapContainer center={[currentLocation.latitud, currentLocation.longitud]} zoom={2} zoomControl={false} style={{ height: '100%' }}>
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; OpenStreetMap contributors" />
+      <Sidebar />
+      <div  style={{ padding: '10px', textAlign: 'center', backgroundColor: 'white', boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.2)' }}>
+          <div className="gap-5" style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
+              <div style={{ width: '20px', height: '20px', backgroundColor: 'red', marginRight: '10px' }}></div>
+              Más de 30 animales
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
+              <div style={{ width: '20px', height: '20px', backgroundColor: 'orange', marginRight: '10px' }}></div>
+              Entre 15 y 29 animales
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{ width: '20px', height: '20px', backgroundColor: 'yellow', marginRight: '10px' }}></div>
+              Menos de 15 animales
+            </div>
+          </div>
+        </div>
+      <div style={{ height: '100vh' }}>
+        <MapContainer center={[currentLocation.latitud, currentLocation.longitud]} zoom={2} zoomControl={false} style={{ height: '100%' }}>
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; OpenStreetMap contributors" />
 
-        {animals.map((animal, index) => {
-          const { latitud, longitud } = animal;
-          const distance = Math.sqrt((latitud - currentLocation.latitud) ** 4 + (longitud - currentLocation.longitud) ** 4);
+          {Object.entries(countAnimalsByRegion()).map(([region, data], index) => {
+            const { count, coordinates } = data;
+            const color = getColorByCount(count);
 
-          return (
-            <Circle
-              key={index}
-              center={[latitud, longitud]}
-              radius={800000}
-              pathOptions={{ color: getColor(distance), opacity: 0 }}
-            />
-          );
-        })}
-      </MapContainer>
-    </div>
+            return (
+              <CircleMarker
+                key={index}
+                center={coordinates}
+                radius={80}
+                pathOptions={{ color, opacity: 0.7, fillOpacity: 0.5 }}
+              >
+                <Tooltip>{`${region}: ${count} animal(es)`}</Tooltip>
+              </CircleMarker>
+            );
+          })}
+        </MapContainer>
+        
+      </div>
+      
     </>
   );
 };
-

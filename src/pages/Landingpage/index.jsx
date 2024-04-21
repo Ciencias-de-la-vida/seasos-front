@@ -68,7 +68,7 @@ export default function LandingpagePage() {
         <div className="flex flex-col items-start justify-start w-full max-w-[100%] pb-12"  id='datos' style={{ backgroundColor: "#0a2747" }}>
           <div className="h-px w-full mt-4" />
           <Heading size="md" as="h2" className="w-[100%] text-center">
-            Cifras
+            Datos Recopilados
           </Heading>
           <div className="flex justify-center gap-20 mt-2 ms-auto mx-auto">
             <Counters />

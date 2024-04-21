@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Sidebar } from 'components/Nav/Sidebar';
 import "../../styles/login.css";
 import { Heading } from 'components';
+import Swal from 'sweetalert2';
 
 
 export const Login = () => {
@@ -50,16 +51,29 @@ export const Login = () => {
   const login = async (e) => {
     try {
       const response = await axios.post('https://api-rest-python-six.vercel.app/login', credentials);
-      console.log("STATUS", response.status)
       if (response.status == 200) {
         localStorage.setItem("isLogged", true)
+        await Swal.fire({
+          icon: 'success',
+          title: '¡Inicio de sesión exitoso!',
+          text: '¡Bienvenido!'
+        });
         navigate("/animalT")
       } else {
         localStorage.setItem("isLogged", false)
+        await Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un problema al iniciar sesión'
+        });
       }
     } catch (err) {
       console.log(err)
-      alert("Error al iniciar sesión: " + err.response.data.message);
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: `Error al iniciar sesión: ${err.response.data.message}`
+      });
     }
   }
 
@@ -82,16 +96,16 @@ export const Login = () => {
           <Heading
             size="md"
             as="h2"
-            className="w-[90%] mt-4"
+            className="w-[100%] mt-4 text-center"
             style={{
-              fontSize: "35px",
-              marginBottom: isSigningUp ? "" : "-80px",
+              fontSize: "40px",
+              marginBottom: isSigningUp ? "" : "-25px",
             }}
           >
             {isSigningUp ? 'Registro' : 'Inicio de Sesión'}
           </Heading>
           <form>
-            <div className="input-group">
+            <div className="input-group d-flex align-items-center justify-content-center">
 
               <div className="input-field" style={{ maxHeight: isSigningUp ? '65px' : '0', overflow: 'hidden', transition: 'max-height 0.5s' }} id="nameField">
                 <i className="fa fa-user"></i>

@@ -8,8 +8,9 @@
 .containerL{
     width: 100%;
     height: 100vh;
-    background-image: url("https://images.pexels.com/photos/3678323/pexels-photo-3678323.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-image: url("../assets/images/wallpaperbetter.com_7680x4320.jpg");
     background-position: center;
+    object-fit: contain;
     background-size: cover;
     position: relative;
 }
@@ -21,7 +22,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #bbbbbb46;
+    background: #46464657;
     padding: 10px 50px 50px;
     text-align: center;
     border-radius: 30px;
@@ -117,6 +118,10 @@ input{
 .input-group{
     height: 250px;
     margin: 5px 5px;
+}
+
+.input-group .input-field{
+    height: 60px;
 }
 
 .btn-field button.disable{

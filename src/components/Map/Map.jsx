@@ -6,6 +6,8 @@ import { Sidebar } from "../Nav/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { apiAnimals } from "./apiAnimals";
 import { Search } from "./Search";
+import { Toaster, toast } from "sonner";
+
 
 export const MyIcon = L.icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
@@ -16,10 +18,10 @@ export const MyIcon = L.icon({
   shadowSize: [41, 41]
 });
 
-
-
 export const Map = ({ currentLocation }) => {
 const [animals, setAnimals] = useState([])
+const latitud = currentLocation && currentLocation.latitud ? currentLocation.latitud : 0;
+const longitud = currentLocation && currentLocation.longitud ? currentLocation.longitud : 0;
 
   const fetchData = async()=>{
     try {
@@ -48,23 +50,41 @@ const [animals, setAnimals] = useState([])
     return null;
   };
 
+  useEffect(() => {
+    const checkLocation = () => {
+      if (!currentLocation || !currentLocation.latitud || !currentLocation.longitud) {
+        toast.error("Permite acceder a tu ubicación para una mejor experiencia!!");
+        console.log("Holi")
+      }
+    };
+  
+    checkLocation();
+  
+    const intervalId = setInterval(checkLocation, 5 * 60 * 1000);
+  
+    return () => clearInterval(intervalId);
+  }, [currentLocation]);
+  
+
   return (
     <>
     <div className="flex">
+    <Toaster className="mx-4" richColors  expand={true}  />
+    </div>
       <div style={{width: "50px", margin:"30px"} }>
             <Sidebar />
       </div>
         <div className="col-md-12" >
           
           <div style={{ display: "flex", height: "100vh", width: "100%" }}>
-            <MapContainer center={[currentLocation.latitud, currentLocation.longitud]}
-            zoom={15} style={{ flex: "1" }} zoomControl={false}>
+            <MapContainer center={[latitud, longitud]}
+            zoom={latitud && longitud ? 15 : 2} style={{ flex: "1" }} zoomControl={false}>
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; OpenStreetMap contributors"
               />
 
-              <MapCenter center={[currentLocation.latitud, currentLocation.longitud]} />
+              <MapCenter center={[latitud, longitud]} />
 Q
               {animals.map((marker, index) => (
                 <Marker key={index} position={[marker.latitud, marker.longitud]} icon={MyIcon}>
@@ -91,7 +111,6 @@ Q
       </div>
           </div>
         </div>
-      </div>
     </>
   );
 };

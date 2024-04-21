@@ -77,7 +77,7 @@ export const Animal = () => {
                 <p className="mt-1" style={{ color: 'gray', fontSize: "20px", fontWeight: "400", textAlign: "center" }}>
                 Cientifico: {animal?.cientifico}
                 </p>
-                <p style={{ color: 'gray', fontSize: "15px", fontWeight: "400", textAlign: "center", marginTop: "-5%" }}>
+                <p style={{ color: 'gray', fontSize: "15px", fontWeight: "400", textAlign: "center", marginTop: "-2%" }}>
                 Region: {animal?.region}
                 </p>
               </div>
