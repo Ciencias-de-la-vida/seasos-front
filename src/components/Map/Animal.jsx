@@ -73,41 +73,60 @@ export const Animal = () => {
               </div>
               </div>
               <div style={{marginLeft: "10%"}}>
-                <h2 className="mt-4" style={{ color: 'black', fontSize: "35px", fontWeight: "900", textAlign: "center" }}>{animal?.nombre}</h2>
-                <p className="mt-1" style={{ color: 'gray', fontSize: "20px", fontWeight: "400", textAlign: "center" }}>
+                <h2 className="mt-4" style={{ color: 'black', fontSize: "35px", fontWeight: "900", textAlign: "center", width: "15ch" }}>{animal?.nombre}</h2>
+                <p className="mt-2" style={{ color: 'gray', fontSize: "20px", fontWeight: "400", textAlign: "center",  }}>
                 Cientifico: {animal?.cientifico}
                 </p>
-                <p style={{ color: 'gray', fontSize: "15px", fontWeight: "400", textAlign: "center", marginTop: "-2%" }}>
+                <p className='mt-2' style={{ color: 'gray', fontSize: "15px", fontWeight: "400", textAlign: "center"}}>
                 Region: {animal?.region}
                 </p>
               </div>
           </div>
         </div>
-        <div className="col-md-8 mt-5 text-center" style={{marginLeft: "20%"}}>
+        <div className="col-md-8 mt-5 text-center" style={{ marginLeft: "20%" }}>
           <section style={{ backgroundColor: "#0a2747", padding: "40px" }}>
             <Heading size="sm" as="h2" className="text-white">
               Descripción
             </Heading>
-            <p style={{ color: 'white', fontSize: "15px", fontWeight: "bold", textAlign: "justify", marginTop: "10px" }}>
-              {result}
-            </p>
+            {loading ? ( // Mostramos el skeleton mientras carga
+              <div className="animate-pulse p-4">
+              <div className="bg-gray-300 h-6 w-100 mb-2"></div>
+              <div className="bg-gray-300 h-6 w-100 mb-2"></div>
+              <div className="bg-gray-300 h-6 w-100 mb-2"></div>
+            </div>
+            ) : (
+              <p style={{ color: 'white', fontSize: "15px", fontWeight: "bold", textAlign: "justify", marginTop: "10px" }}>
+                {result}
+              </p>
+            )}
           </section>
         </div>
-        <div className="col-md-8 mt-3 text-center" style={{marginLeft: "20%"}}>
+        
+        <div className="col-md-8 mt-3 text-center" style={{ marginLeft: "20%" }}>
           <section style={{ backgroundColor: "#fff", padding: "20px" }}>
             <Heading size="sm" as="h2" className="text-dark">
               Cazados por
             </Heading>
-            {result2 && result2.length > 0 ? (
-              <ul style={{ color: 'black', fontSize: "15px", fontWeight: "bold", textAlign: "justify", marginTop: "10px", paddingLeft: "20px" }}>
-                {result2.map((item, index) => (
-                  <li key={index} style={{ marginBottom: "10px" }}>{item}</li>
-                ))}
-              </ul>
+            {loading ? ( // Mostramos el skeleton mientras carga
+              <div className="animate-pulse p-4">
+              <div className="bg-gray-300 h-6 w-100 mb-2"></div>
+              <div className="bg-gray-300 h-6 w-100 mb-2"></div>
+              <div className="bg-gray-300 h-6 w-100 mb-2"></div>
+            </div>
             ) : (
-              <p style={{ color: 'black', fontSize: "15px", fontWeight: "bold", textAlign: "justify", marginTop: "10px" }}>
-                No se encontraron usos específicos después de cazar este animal.
-              </p>
+              <>
+                {result2 && result2.length > 0 ? (
+                  <ul style={{ color: 'black', fontSize: "15px", fontWeight: "bold", textAlign: "justify", marginTop: "10px", paddingLeft: "20px" }}>
+                    {result2.map((item, index) => (
+                      <li key={index} style={{ marginBottom: "10px" }}>{item}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p style={{ color: 'black', fontSize: "15px", fontWeight: "bold", textAlign: "justify", marginTop: "10px" }}>
+                    No se encontraron usos específicos después de cazar este animal.
+                  </p>
+                )}
+              </>
             )}
           </section>
         </div>
