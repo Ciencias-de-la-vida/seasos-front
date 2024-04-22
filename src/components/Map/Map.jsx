@@ -32,6 +32,7 @@ export const Map = ({ currentLocation }) => {
   const [animals, setAnimals] = useState([])
   const latitud = currentLocation && currentLocation.latitud ? currentLocation.latitud : 0;
   const longitud = currentLocation && currentLocation.longitud ? currentLocation.longitud : 0;
+  const [darkMode, setDarkMode] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -53,6 +54,10 @@ export const Map = ({ currentLocation }) => {
   if (!currentLocation || currentLocation.latitud === null || currentLocation.longitud === null) {
     return null;
   }
+
+  const handleToggleDarkMode = (newMode) => {
+    setDarkMode(newMode);
+  };
 
   const MapCenter = ({ center }) => {
     const map = useMap();
@@ -85,7 +90,7 @@ export const Map = ({ currentLocation }) => {
         <Toaster className="mx-4" richColors expand={true} />
       </div>
       <div style={{ width: "50px" }}>
-        <Sidebar />
+        <Sidebar onToggleDarkMode={handleToggleDarkMode} />
       </div>
       <div className="col-md-12" >
 
@@ -93,9 +98,9 @@ export const Map = ({ currentLocation }) => {
           <MapContainer center={[latitud, longitud]}
             zoom={latitud && longitud ? 15 : 2} style={{ flex: "1" }} zoomControl={false}>
             <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution="&copy; OpenStreetMap contributors"
-            />
+          url={!darkMode ? "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"}
+          attribution={!darkMode ? "&copy; OpenStreetMap contributors" : "&copy; CartoDB"}
+        />
 
             <MapCenter center={[latitud, longitud]} />
             {currentLocation && currentLocation.latitud !== null && currentLocation.longitud !== null && (

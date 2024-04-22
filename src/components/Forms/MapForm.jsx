@@ -39,7 +39,7 @@ export const MapForm = ({ onLatLngChange }) => {
   };
 
   return (
-    <MapContainer center={[0, 0]} zoom={3} style={{ height: '300px', width: '600px' }}>
+    <MapContainer center={[0, 0]} zoom={3} style={{ height: '200px', width: '300px' }}>
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <DrawLayer onMarkerAdd={handleMarkerAdd} />
       {marker && <Marker position={marker.getLatLng()} icon={MyIcon} />}

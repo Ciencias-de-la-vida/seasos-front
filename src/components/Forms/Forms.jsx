@@ -131,8 +131,9 @@ export const Form = () => {
   return (
     <>
       <Sidebar />
-      <div className='container mb-4'>
-        <div className='row justify-content-center'>
+      <div id='containerF'>
+      <div className='container' >
+      <div className='row justify-content-center'>
           <div className='col-lg-8'>
             <div className='card my-2 rounded-3' style={{ width: '80vh' }}>
               <img
@@ -208,6 +209,7 @@ export const Form = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </>
   );
