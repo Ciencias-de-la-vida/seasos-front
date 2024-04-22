@@ -5,6 +5,12 @@ import { Sidebar } from "components/Nav/Sidebar";
 
 export const HeatMap = ({ currentLocation }) => {
   const [animals, setAnimals] = useState([]);
+  const [darkMode, setDarkMode] = useState(false);
+
+  const handleToggleDarkMode = (newMode) => {
+    setDarkMode(newMode);
+  };
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,7 +72,7 @@ export const HeatMap = ({ currentLocation }) => {
 
   return (
     <>
-      <Sidebar />
+      <Sidebar onToggleDarkMode={handleToggleDarkMode} />
       <div  style={{ padding: '10px', textAlign: 'center', backgroundColor: 'white', boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.2)' }}>
           <div className="gap-5" style={{ display: 'flex', justifyContent: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
@@ -85,7 +91,10 @@ export const HeatMap = ({ currentLocation }) => {
         </div>
       <div style={{ height: '100vh' }}>
         <MapContainer center={[currentLocation.latitud, currentLocation.longitud]} zoom={2} zoomControl={false} style={{ height: '100%' }}>
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; OpenStreetMap contributors" />
+        <TileLayer
+          url={!darkMode ? "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"}
+          attribution={!darkMode ? "&copy; OpenStreetMap contributors" : "&copy; CartoDB"}
+        />
 
           {Object.entries(countAnimalsByRegion()).map(([region, data], index) => {
             const { count, coordinates } = data;
