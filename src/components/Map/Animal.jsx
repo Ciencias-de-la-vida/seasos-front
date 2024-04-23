@@ -13,6 +13,11 @@ export const Animal = () => {
   const [result, setResult] = useState("");
   const [result2, setResult2] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
+  const handleToggleDarkMode = (newMode) => {
+    setDarkMode(newMode);
+  };
 
   const configuration = new Configuration({
     apiKey: "sk-proj-DKBrAd0IagEFGTrZzFy0T3BlbkFJ15QncAPeMvYMy836MI9x"
@@ -62,7 +67,7 @@ export const Animal = () => {
 
   return (
     <>
-      <Sidebar />
+      <Sidebar onToggleDarkMode={handleToggleDarkMode} />
       <div className="row">
       <div className=""></div>
       <div className="col-md-12 d-flex align-items-center justify-content-center" >
