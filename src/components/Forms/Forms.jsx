@@ -11,6 +11,7 @@ export const Form = () => {
   const [latLng, setLatLng] = useState(null);
   const [file, setFile] = useState(null);
   const [img, setImg] = useState("")
+  const [darkMode, setDarkMode] = useState(false);
 
   const uploadImage = async (e) => {
     e.preventDefault();
@@ -35,6 +36,10 @@ export const Form = () => {
         text: error.message,
       });
     }
+  };
+
+  const handleToggleDarkMode = (newMode) => {
+    setDarkMode(newMode);
   };
 
   const vaciarInputs = () => {
@@ -130,7 +135,7 @@ export const Form = () => {
 
   return (
     <>
-      <Sidebar />
+      <Sidebar onToggleDarkMode={handleToggleDarkMode} />
       <div id='containerF'>
       <div className='container' >
       <div className='row justify-content-center'>

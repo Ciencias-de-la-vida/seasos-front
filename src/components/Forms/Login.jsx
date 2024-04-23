@@ -9,7 +9,12 @@ import Swal from 'sweetalert2';
 
 
 export const Login = () => {
+  const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate()
+
+  const handleToggleDarkMode = (newMode) => {
+    setDarkMode(newMode);
+  };
 
   const [isSigningUp, setIsSigningUp] = useState(false);
 
@@ -89,7 +94,7 @@ export const Login = () => {
 
   return (
     <div>
-      <Sidebar />
+      <Sidebar onToggleDarkMode={handleToggleDarkMode} />
 
       <div className="containerL">
         <div className="form-box">
