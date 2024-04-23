@@ -20,7 +20,7 @@ export const UpdateAnimal =()=> {
     const location = useLocation()
     const datos = location.state
     const navigate = useNavigate()
-    
+    const [darkMode, setDarkMode] = useState(false);
   
     const updateAnimal = async(e)=>{
     try {
@@ -45,11 +45,16 @@ export const UpdateAnimal =()=> {
         console.error(error)
     }
   }
+
+  const handleToggleDarkMode = (newMode) => {
+    setDarkMode(newMode);
+  };
+
   return (
     <>
     <div className="row">
     <div className="col-md-2">
-    <Sidebar/>
+    <Sidebar onToggleDarkMode={handleToggleDarkMode} />
     </div>
     <div className="col-md-9">
     <MDBContainer fluid>

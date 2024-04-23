@@ -7,6 +7,7 @@ import { Heading } from 'components';
 export const UserTable = () => {
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [darkMode, setDarkMode] = useState(false);
     const itemsPerPage = 10; // Número de usuarios por página
 
     const getUsers = async () => {
@@ -17,6 +18,10 @@ export const UserTable = () => {
             console.error('Error fetching users:', error);
         }
     };
+
+    const handleToggleDarkMode = (newMode) => {
+        setDarkMode(newMode);
+      };
 
     const deleteUser = async (id) => {
         try {
@@ -55,7 +60,7 @@ export const UserTable = () => {
         <div className="container-fluid">
             <div className="row">
                 <div className="col-md-2">
-                    <Sidebar />
+                <Sidebar onToggleDarkMode={handleToggleDarkMode} />
                 </div>
                 <div className="col-md-10">
                     <Heading size="md" as="h2" className="text-center text-black mt-3 mb-2">

@@ -7,6 +7,7 @@ import { Heading } from 'components';
 export const AnimalTable = () => {
     const [animals, setAnimals] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [darkMode, setDarkMode] = useState(false);
     const itemsPerPage = 10; // Número de animales por página
 
     const getAnimals = async () => {
@@ -17,6 +18,10 @@ export const AnimalTable = () => {
             console.error('Error fetching animals:', error);
         }
     };
+
+    const handleToggleDarkMode = (newMode) => {
+        setDarkMode(newMode);
+      };
 
     const toggleStatus = async (id, currentStatus) => {
         try {
@@ -65,7 +70,7 @@ export const AnimalTable = () => {
         <div className="container-fluid">
             <div className="row">
                 <div className="col-md-2">
-                    <Sidebar />
+                <Sidebar onToggleDarkMode={handleToggleDarkMode} />
                 </div>
                 <div className="col-md-10">
                     <Heading size="md" as="h2" className="w-[100%] text-center text-black mt-3 mb-2">

@@ -17,6 +17,7 @@ import axios from 'axios';
 import { Sidebar } from 'components/Nav/Sidebar';
 
 export const UpdateUser =()=> {
+  const [darkMode, setDarkMode] = useState(false);
     const navigate = useNavigate()
     const location = useLocation()
     const datos = location.state;
@@ -40,11 +41,16 @@ export const UpdateUser =()=> {
         console.error(error)
     }
   }
+
+  const handleToggleDarkMode = (newMode) => {
+    setDarkMode(newMode);
+  };
+
   return (
     <>
     <div className="row">
     <div className="col-md-2">
-    <Sidebar/>
+    <Sidebar onToggleDarkMode={handleToggleDarkMode} />
     </div>
     <div className="col-md-9">
     <MDBContainer fluid>
