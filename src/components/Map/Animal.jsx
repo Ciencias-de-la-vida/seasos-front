@@ -90,9 +90,9 @@ export const Animal = () => {
             </Heading>
             {loading ? ( // Mostramos el skeleton mientras carga
               <div className="animate-pulse p-4">
-              <div className="bg-gray-300 h-6 w-100 mb-2"></div>
-              <div className="bg-gray-300 h-6 w-100 mb-2"></div>
-              <div className="bg-gray-300 h-6 w-100 mb-2"></div>
+              <div className="bg-gray-300 h-2 w-100 mb-2"></div>
+              <div className="bg-gray-300 h-2 w-100 mb-2"></div>
+              <div className="bg-gray-300 h-2 w-100 mb-2"></div>
             </div>
             ) : (
               <p style={{ color: 'white', fontSize: "15px", fontWeight: "bold", textAlign: "justify", marginTop: "10px" }}>
@@ -109,9 +109,9 @@ export const Animal = () => {
             </Heading>
             {loading ? ( // Mostramos el skeleton mientras carga
               <div className="animate-pulse p-4">
-              <div className="bg-gray-300 h-6 w-100 mb-2"></div>
-              <div className="bg-gray-300 h-6 w-100 mb-2"></div>
-              <div className="bg-gray-300 h-6 w-100 mb-2"></div>
+              <div className="bg-gray-300 h-2 w-100 mb-2"></div>
+              <div className="bg-gray-300 h-2 w-100 mb-2"></div>
+              <div className="bg-gray-300 h-2 w-100 mb-2"></div>
             </div>
             ) : (
               <>
