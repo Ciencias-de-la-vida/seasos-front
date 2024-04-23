@@ -67,15 +67,16 @@ export const AnimalTable = () => {
     };
 
     return (
-        <div className="container-fluid">
+        <div className="container">
             <div className="row">
                 <div className="col-md-2">
                 <Sidebar onToggleDarkMode={handleToggleDarkMode} />
                 </div>
-                <div className="col-md-10">
-                    <Heading size="md" as="h2" className="w-[100%] text-center text-black mt-3 mb-2">
+                <div className="col-md-10" id='containerTable'>
+                    <Heading size="md" as="h2" className="w-[100%] text-center text-black mt-3 mb-2" id="titleAnimals">
                         Animales Registrados
                     </Heading>
+                    <div className="table-responsive">
                     <table className="table table-striped text-center">
                         <thead>
                             <tr>
@@ -118,7 +119,7 @@ export const AnimalTable = () => {
                         <button onClick={handlePrevPage} disabled={currentPage === 1}>
                         <h3><i className="bi bi-arrow-left-square"></i></h3>
                         </button>
-                        <Heading size="xs" as="h2" className="w-[20%] text-center text-black mt-1 mb-2">
+                        <Heading size="xs" as="h2" className="w-[20%] text-center text-black mt-1 mb-2" id="paginacion">
                         Página {currentPage} de {totalPages}
                     </Heading>
                         <button onClick={handleNextPage} disabled={currentPage === totalPages}>
@@ -126,6 +127,7 @@ export const AnimalTable = () => {
                         </button>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     );

@@ -4,6 +4,8 @@ import App from "./App";
 import "./styles/tailwind.css";
 import "./styles/index.css";
 import "./styles/font.css";
+import "./styles/responsive.css";
+
 
 const container = document.getElementById("root");
 const root = createRoot(container);

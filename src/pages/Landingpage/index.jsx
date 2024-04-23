@@ -6,6 +6,7 @@ import { Counters } from "pages/Counters";
 import { Animals } from "pages/Animals";
 import { NavbarLanding } from "pages/Nav";
 
+
 export default function LandingpagePage() {
   return (
     <>
@@ -13,7 +14,7 @@ export default function LandingpagePage() {
         <title>Landing</title>
         <meta name="description" content="Web site created using create-react-app" />
       </Helmet>
-      <div className="md:container md:mx-auto h-screen">
+      <div className="md:container md:mx-auto h-screen" id="containerLanding">
         <div className="h-screen w-full bg-white-A700 relative" id="home">
           <Img
             src="images/img_pexels_pixabay_64219.png"
@@ -25,10 +26,10 @@ export default function LandingpagePage() {
             <div className="flex flex-col items-start justify-start w-full ml-6 max-w-[1247px] mt-12 ">
 
               <div className="h-px w-full  ml-[5px] mt-[5%]" />
-              <Heading size="md" as="h2" className="w-[50%] ml-[3px]">
+              <Heading size="md" as="h2" className="w-[50%] ml-[3px]" id="titleLanding">
                 El Tesoro de <br />la Vida Marina
               </Heading>
-              <Text size="s" as="p" className="w-[43%] ml-[7px] z-[1]">
+              <Text size="s" as="p" className="w-[43%] ml-[7px] z-[1]" id="textLanding">
                 Sumérgete en el fascinante mundo de los océanos a través de nuestra plataforma dedicada a la conciencia y
                 conservación de la vida marina.
               </Text>
@@ -37,7 +38,7 @@ export default function LandingpagePage() {
                   <Button className="font-poppins min-w-[141px] mt-3" href="/map">Explora en el mapa</Button>
                 </Link>
                 <div className="flex flex-col items-center justify-start w-1/4 mt-[-15%]">
-                  <div className="flex flex-row justify-center w-full">
+                  <div className="flex flex-row justify-center w-full" id="containerUnete">
                     <div className="flex flex-row justify-center w-full p-[21px] bg-gradient">
                       <div className="flex flex-col items-start justify-start w-[89 gap-1 mx-[13px]">
                         <Heading as="h3" className="!text-[18.73px]">
@@ -51,11 +52,11 @@ export default function LandingpagePage() {
                     </div>
                   </div>
 
-                  <Link to="/login" style={{ textDecoration: "none" }}>
+                  <Link to="/login" style={{ textDecoration: "none" }} id="btnParticipa">
                     <Button
                       size="sm"
                       rightIcon={<Img src="images/img_group_4.svg" alt="Group 4" />}
-                      className="w-full gap-[15px] mt-[-05%]"
+                      className="w-full gap-[15px] mt-[-02%]"
                     >
                       Participa Aquí
                     </Button>
@@ -67,7 +68,7 @@ export default function LandingpagePage() {
         </div>
         <div className="flex flex-col items-start justify-start w-full max-w-[100%] pb-12"  id='datos' style={{ backgroundColor: "#0a2747" }}>
           <div className="h-px w-full mt-4" />
-          <Heading size="md" as="h2" className="w-[100%] text-center">
+          <Heading size="md" as="h2" className="w-[100%] text-center" id="titles">
             Datos Recopilados
           </Heading>
           <div className="flex justify-center gap-20 mt-2 ms-auto mx-auto">
@@ -75,7 +76,7 @@ export default function LandingpagePage() {
           </div>
         </div>
         <div className="row mt-4 mb-3">
-            <Heading size="md" as="h2" className="w-[100%] text-center text-black">
+            <Heading size="md" as="h2" className="w-[100%] text-center text-black" id="titles">
               Animales Registrados
             </Heading>
           </div>

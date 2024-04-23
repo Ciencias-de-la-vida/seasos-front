@@ -21,7 +21,7 @@ export const Animals = () => {
         <div>
             <MDBRow className="mb-4 mt-3" style={{ minHeight: "70vh" }}>
                 {listaAnimales?.map((item, index) => (
-                    <MDBCol key={index} lg={2} md={12} sm={12} className='mb-4 mb-lg-2'>
+                    <MDBCol key={index} lg={2} md={6} sm={6} xs={6} className='mb-4 mb-lg-2' id='containerAnimals'>
                         <div className="image-container">
                             <img
                                 src={item.img}

@@ -3,17 +3,18 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/reac
 import { Link } from 'react-router-dom';
 import { Heading, Img } from 'components';
 import { Link as ScrollLink } from 'react-scroll';
+import img from "../assets/images/LogoWhite.png"
 
 export const NavbarLanding = () => {
   return (
-    <Navbar id='navbarLanding'>
-      <NavbarBrand>
-        <Img src="images/img_1_1.png" alt="Brand Logo" className="h-12 w-12 mr-2" style={{marginLeft: "-18%"}} />
+    <Navbar id='navbarLanding' className="flex-wrap">
+      <NavbarBrand className="flex items-center">
+        <Img src={img} alt="Brand Logo" className="h-12 w-12 mr-2" />
         <Heading size="sm" as="h3" className="font-bold text-white mt-2">
           SEASOS
         </Heading>
       </NavbarBrand>
-      <NavbarContent justify='end' className="sm:hidden gap-16 mt-2">
+      <NavbarContent justify='end' className="sm:hidden gap-4 mt-2">
         <NavbarItem>
           <ScrollLink to="home" spy={true} smooth={true} duration={500} className="text-white" style={{textDecoration: "none", fontWeight:"bold", fontSize: "20px", cursor: "pointer"}}>
             Inicio

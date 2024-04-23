@@ -65,7 +65,8 @@ export const Search = ({ location }) => {
             <input
               type="search"
               className="text-center"
-              placeholder="Busca tu proximo destino aquí"
+              id="inputSearch"
+              placeholder="Busca el animal que desees"
               value={animal}
               onChange={handleSearchChange}
             />
