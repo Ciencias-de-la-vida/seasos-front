@@ -27,11 +27,11 @@ export const HeatMap = ({ currentLocation }) => {
 
   const getColorByCount = (count) => {
     if (count >= 30) {
-      return "red"; // Más de 5 animales
+      return darkMode ? "purple" : "darkred"; // Más de 5 animales
     } else if (count >= 15) {
-      return "orange"; // Entre 3 y 4 animales
+      return darkMode ? "pink" : "orange"; // Entre 3 y 4 animales
     } else {
-      return "yellow"; // Menos de 3 animales
+      return darkMode ? "blue" : "yellow"; // Menos de 3 animales
     }
   };
 
