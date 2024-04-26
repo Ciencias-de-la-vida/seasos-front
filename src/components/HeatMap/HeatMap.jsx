@@ -74,7 +74,7 @@ export const HeatMap = ({ currentLocation }) => {
     <>
       <Sidebar onToggleDarkMode={handleToggleDarkMode} />
       <div style={{ padding: '10px', textAlign: 'center', backgroundColor: darkMode ? "black" : "white", boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.2)' }}>
-        <div className="gap-5" style={{ display: 'flex', justifyContent: 'center' }}>
+        <div id="infoColors" className="gap-5" style={{ display: 'flex', justifyContent: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
             <div style={{ width: '20px', height: '20px', backgroundColor: darkMode ? "purple" : "darkred", marginRight: '10px', color: darkMode ? "white" : "black" }}></div>
             <span style={{

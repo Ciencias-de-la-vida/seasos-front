@@ -8,19 +8,19 @@ import logoWhite from "../../assets/images/logoWhite.png";
 import { Heading } from '..';
 import { Switch } from '@nextui-org/react';
 
-const navItems = ['Mapa', 'HeatMap', 'Sugiere', 'Home'];
-const navItemsAdmin = ['Usuarios', 'Animales', 'Home'];
-const navLinks = ['/map', '/heatmap', '/form', '/'];
-const navLinksAdmin = ['/userT', '/animalT', '/'];
-const navIcons = ['fa fa-map mx-2', 'fa fa-fire mx-2', 'fa fa-fish mx-2', 'fa fa-home mx-2'];
-const navIconsAdmin = ['fa fa-user mx-2', 'fa fa-fish mx-2', 'fa fa-home mx-2'];
+const navItems = ['Mapa', 'HeatMap', 'Sugiere'];
+const navItemsAdmin = ['Usuarios', 'Animales'];
+const navLinks = ['/map', '/heatmap', '/form'];
+const navLinksAdmin = ['/userT', '/animalT'];
+const navIcons = ['fa fa-map mx-2', 'fa fa-fire mx-2', 'fa fa-fish mx-2'];
+const navIconsAdmin = ['fa fa-user mx-2', 'fa fa-fish mx-2'];
 const textLightClass = 'text-white';
 const textDarkClass = 'text-black';
 
 
 export const Sidebar = ({ onToggleDarkMode }) => {
     const isLogged = localStorage.getItem('isLogged');
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
     const [darkMode, setDarkMode] = useState(
         localStorage.getItem('darkMode') === 'true'
     );
@@ -34,12 +34,12 @@ export const Sidebar = ({ onToggleDarkMode }) => {
     const toggleDarkMode = () => {
         const newDarkMode = !darkMode;
         setDarkMode(newDarkMode);
-        localStorage.setItem('darkMode', newDarkMode); // Actualiza localStorage
+        localStorage.setItem('darkMode', newDarkMode);
         
     };
 
     useEffect(() => {
-        onToggleDarkMode(darkMode); // Llama a la función de cambio de modo oscuro
+        onToggleDarkMode(darkMode); 
     }, [darkMode, onToggleDarkMode]);
 
     return (
@@ -64,7 +64,7 @@ export const Sidebar = ({ onToggleDarkMode }) => {
                 <nav>
                     {isLogged ? (
                         navItemsAdmin.map((item, index) => (
-                            <Link to={navLinksAdmin[index]} className={`mt-5 ${darkMode ? 'button-link' : 'button-link2'}`} key={item}>
+                            <Link to={navLinksAdmin[index]} className={`mt-4 ${darkMode ? 'button-link' : 'button-link2'}`} key={item}>
                                 <button type='button' onClick={() => handleHomeClick(item)}>
                                     <span className='icon'>
                                         <i className={`${navIconsAdmin[index]} ${darkMode ? textLightClass : textDarkClass} mx-[1vh]`}></i>
@@ -75,7 +75,7 @@ export const Sidebar = ({ onToggleDarkMode }) => {
                         ))
                     ) : (
                         navItems.map((item, index) => (
-                            <Link to={navLinks[index]} className={`mt-5 ${darkMode ? 'button-link' : 'button-link2'} ${window.location.pathname === navLinksAdmin[index] ? 'selected' : ''}`} key={item}>
+                            <Link to={navLinks[index]} className={`mt-4 ${darkMode ? 'button-link' : 'button-link2'} ${window.location.pathname === navLinksAdmin[index] ? 'selected' : ''}`} key={item}>
                                 <button type='button' className='btnO' onClick={() => handleHomeClick(item)} style={{ fontSize: "16px" }}>
                                     <span className='icon'>
                                         <i className={`${navIcons[index]} ${darkMode ? textLightClass : textDarkClass} mx-[1vh]`}></i>
@@ -87,10 +87,10 @@ export const Sidebar = ({ onToggleDarkMode }) => {
                     )}
 
                 </nav>
-                <div className="bottom-section mt-[12vh]">
+                <div className="bottom-section mt-[30vh]">
     <div className="dark-mode-container mx-3">
         {isOpen ? (
-            <div className='d-flex'>
+            <div className='d-flex mt-[40vh]'>
                 <i className={`fa fa-moon mx-2 ${darkMode ? textLightClass : textDarkClass}`}></i>
                 <span className={`mt-[-0.5vh] ${darkMode ? textLightClass : textDarkClass}`}>Dark</span>
                 <Switch
@@ -101,7 +101,7 @@ export const Sidebar = ({ onToggleDarkMode }) => {
                 />
             </div>
         ) : (
-            <>
+            <div className='mt-[35vh]'>
                 <i className={`fa fa-moon mx-[1vh] ${darkMode ? textLightClass : textDarkClass}`}></i>
                 <Switch
                     className='mx-[-1.5vh] mt-[1vh]'
@@ -110,8 +110,19 @@ export const Sidebar = ({ onToggleDarkMode }) => {
                     isSelected={darkMode}
                     style={{ transform: 'scale(0.6)' }}
                 />
-            </>
+            </div>
         )}
+         
+    </div>
+    <div className="home-container">
+    <Link to="/" className={`mt-3 ${darkMode ? 'button-link' : 'button-link2'}`}>
+                                <button type='button' className='btnO' onClick={() => handleHomeClick(item = "Home")} style={{ fontSize: "16px" }}>
+                                    <span className='icon'>
+                                        <i className={`fa fa-home mx-2 ${darkMode ? textLightClass : textDarkClass} mx-[1vh]`}></i>
+                                    </span>
+                                    {isOpen && <span className={darkMode ? textLightClass : textDarkClass}> Home </span>}
+                                </button>
+                            </Link>
     </div>
 </div>
 

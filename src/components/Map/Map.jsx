@@ -97,11 +97,16 @@ export const Map = ({ currentLocation }) => {
       <div style={{ width: "50px" }}>
         <Sidebar onToggleDarkMode={handleToggleDarkMode} />
       </div>
-      <div className="col-md-12" >
-
+      <div className="col-md-12">
         <div style={{ display: "flex", height: "100vh", width: "100%" }}>
           <MapContainer center={[latitud, longitud]}
-            zoom={latitud && longitud ? 5 : 2} style={{ flex: "1" }} zoomControl={false} maxZoom={13} minZoom={2}>
+            zoom={latitud && longitud ? 5 : 2} style={{ flex: "1" }} 
+            maxBounds={[
+              [-90, -180], // Coordenadas del suroeste
+              [90, 180], // Coordenadas del noreste
+            ]}
+            maxBoundsViscosity={1.0} 
+            zoomControl={false} maxZoom={13} minZoom={2}>
             <TileLayer
           url={!darkMode ? "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"}
           attribution={!darkMode ? "&copy; OpenStreetMap contributors" : "&copy; CartoDB"}

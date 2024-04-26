@@ -253,7 +253,6 @@ ul {
 }
 
 .card-body form input{
-  background-color: transparent !important;
   border-color: gray !important;
   border-width: 1px !important;
   border-radius: 5px !important;

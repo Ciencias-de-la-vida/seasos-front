@@ -68,5 +68,8 @@
     #titleAnimals{
         font-size: 40px;
     }
+    #infoColors{
+        display: inline-block !important;
+    }
   }
  

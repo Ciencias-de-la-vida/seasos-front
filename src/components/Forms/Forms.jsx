@@ -5,6 +5,7 @@ import { MapForm } from './MapForm';
 import { Heading } from 'components';
 import { uploadFiles } from '../../../firebase/config';
 import Swal from 'sweetalert2';
+import { color } from 'framer-motion';
 
 export const Form = () => {
   const [inputType, setInputType] = useState('file');
@@ -12,6 +13,16 @@ export const Form = () => {
   const [file, setFile] = useState(null);
   const [img, setImg] = useState("")
   const [darkMode, setDarkMode] = useState(false);
+  const backgroundImageStyle = {
+    backgroundImage: darkMode ?
+      "url(https://images.pexels.com/photos/2832767/pexels-photo-2832767.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)" :
+      "url(https://images.pexels.com/photos/4221755/pexels-photo-4221755.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)",
+    backgroundPosition: "center",
+    objectFit: "contain",
+    backgroundSize: "cover",
+    position: "relative"
+  };
+
 
   const uploadImage = async (e) => {
     e.preventDefault();
@@ -136,17 +147,17 @@ export const Form = () => {
   return (
     <>
       <Sidebar onToggleDarkMode={handleToggleDarkMode} />
-      <div id='containerF'>
+      <div id='containerF' style={backgroundImageStyle}>
       <div className='container' >
       <div className='row justify-content-center'>
           <div className='col-lg-8'>
-            <div className='card my-2 rounded-3' style={{ width: '80vh' }}>
+            <div className='card my-2 rounded-3' style={{ width: '80vh', backgroundColor: darkMode ? "black": "white" }}>
               <img
-                src='https://images.pexels.com/photos/2832767/pexels-photo-2832767.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+                src= {darkMode ? 'https://images.pexels.com/photos/1618606/pexels-photo-1618606.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' : 'https://images.pexels.com/photos/986805/pexels-photo-986805.jpeg'}
                 className='card-img-top rounded-top'
                 alt='Sample photo'
               />
-              <Heading size="xs" as="h2" className="w-[100%] text-center text-black mt-3 mb-2" style={{fontSize: "25px"}}>
+              <Heading size="xs" as="h2" className="w-[100%] text-center mt-3 mb-2" style={{fontSize: "25px", color: darkMode? "white": "black"}}>
                         Solicitud de animal
                     </Heading>
               <div className='card-body px-5'>
@@ -167,7 +178,7 @@ export const Form = () => {
                   </div>
                   <div className='row mb-3'>
                     <div className='col'>
-                      <label htmlFor='form4' className='form-label'>
+                      <label htmlFor='form4' className='form-label' style={{color: darkMode ? "white":"black"}}>
                         Latitud y Longitud
                       </label>
                       <div className='container'>
@@ -177,7 +188,7 @@ export const Form = () => {
                   </div>
                   <div className='row mb-3'>
                     <div className='col'>
-                      <label htmlFor='form6' className='form-label'>
+                      <label htmlFor='form6' className='form-label' style={{color: darkMode ? "white":"black"}}>
                         Imagen del animal
                       </label>
                       <select className='form-select mb-2' id='form6' onChange={handleInputChange}>
@@ -194,7 +205,7 @@ export const Form = () => {
                            accept=".png, .jpg, .jpeg"
                           />
                           <div className="d-grid gap-2">
-                          <button className='btn btn-primary mt-2 ' onClick={(e) => uploadImage(e)}>
+                          <button className={`btn ${darkMode ? "btn-primary": "btn-dark"} mt-2 `} onClick={(e) => uploadImage(e)}>
                             <i className="fa fa-file mx-2"></i>Subir Imagen
                           </button>
                           </div>
