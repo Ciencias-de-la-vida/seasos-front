@@ -64,7 +64,7 @@ export const Sidebar = ({ onToggleDarkMode }) => {
                 <nav>
                     {isLogged ? (
                         navItemsAdmin.map((item, index) => (
-                            <Link to={navLinksAdmin[index]} className={`button-link mt-5 ${window.location.pathname === navLinksAdmin[index] ? 'selected' : ''}`} key={item}>
+                            <Link to={navLinksAdmin[index]} className={`mt-5 ${darkMode ? 'button-link' : 'button-link2'}`} key={item}>
                                 <button type='button' onClick={() => handleHomeClick(item)}>
                                     <span className='icon'>
                                         <i className={`${navIconsAdmin[index]} ${darkMode ? textLightClass : textDarkClass} mx-[1vh]`}></i>
@@ -75,8 +75,8 @@ export const Sidebar = ({ onToggleDarkMode }) => {
                         ))
                     ) : (
                         navItems.map((item, index) => (
-                            <Link to={navLinks[index]} className={`button-link mt-5 ${window.location.pathname === navLinks[index] ? 'selected' : ''}`} key={item}>
-                                <button type='button' onClick={() => handleHomeClick(item)} style={{ fontSize: "16px" }}>
+                            <Link to={navLinks[index]} className={`mt-5 ${darkMode ? 'button-link' : 'button-link2'} ${window.location.pathname === navLinksAdmin[index] ? 'selected' : ''}`} key={item}>
+                                <button type='button' className='btnO' onClick={() => handleHomeClick(item)} style={{ fontSize: "16px" }}>
                                     <span className='icon'>
                                         <i className={`${navIcons[index]} ${darkMode ? textLightClass : textDarkClass} mx-[1vh]`}></i>
                                     </span>

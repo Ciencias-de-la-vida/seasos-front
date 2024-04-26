@@ -14,7 +14,7 @@ export const NavbarLanding = () => {
           SEASOS
         </Heading>
       </NavbarBrand>
-      <NavbarContent justify='end' className="sm:hidden gap-4 mt-2">
+      <NavbarContent justify='end' className="sm:hidden gap-5 mt-2">
         <NavbarItem>
           <ScrollLink to="home" spy={true} smooth={true} duration={500} className="text-white" style={{textDecoration: "none", fontWeight:"bold", fontSize: "20px", cursor: "pointer"}}>
             Inicio

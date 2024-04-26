@@ -5,11 +5,13 @@ import { NextUIProvider } from "@nextui-org/react";
 
 function App() {
   return (
+    <>
     <NextUIProvider>
     <Router>
       <Routes />
     </Router>
     </NextUIProvider>
+    </>
   );
 }
 

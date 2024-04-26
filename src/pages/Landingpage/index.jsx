@@ -14,12 +14,13 @@ export default function LandingpagePage() {
         <title>Landing</title>
         <meta name="description" content="Web site created using create-react-app" />
       </Helmet>
-      <div className="md:container md:mx-auto h-screen" id="containerLanding">
+      <div className="md:container md:mx-0 h-screen" id="containerLanding">
         <div className="h-screen w-full bg-white-A700 relative" id="home">
           <Img
             src="images/img_pexels_pixabay_64219.png"
             alt="pexelspixabay"
             className="justify-center h-screen w-full left-0 bottom-0 right-0 top-0 m-auto object-cover absolute"
+            style={{overflow: "hidden"}}
           />
           <NavbarLanding/>
           <div className="flex flex-row justify-center w-full h-full pl-[69px] pr-14 left-0 bottom-0 right-0 top-0 py-[69px] md:m-auto bg-black-900_59 absolute">

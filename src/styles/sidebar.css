@@ -5,7 +5,15 @@
     padding-top: 20px;
     gap: 20px;
     font-size: 20px;
+}
 
+.button-link2{
+    text-decoration: none;
+    color: inherit; 
+    padding: 0 12px;
+    padding-top: 20px;
+    gap: 20px;
+    font-size: 20px;
 }
 
 .buscar{ 
@@ -93,8 +101,27 @@
 .sidebar.open nav > button {
     width: 100%;
 }
+.button-link {
+    text-decoration: none;
+    color: inherit;
+    padding-top: 1vh !important;
+    padding-bottom: 2vh !important;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
 
+.button-link2 {
+    text-decoration: none;
+    color: inherit;
+    padding-top: 1vh !important;
+    padding-bottom: 2vh !important;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
 
+/* Estilo para el hover del enlace */
+.button-link:hover {
+    background-color: rgba(180, 185, 190, 0.521); /* Cambiar color de fondo al hacer hover */
+}
 
-  
-  
+.button-link2:hover {
+    background-color: rgba(0, 123, 255, 0.1); /* Cambiar color de fondo al hacer hover */
+}

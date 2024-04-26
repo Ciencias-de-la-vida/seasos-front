@@ -101,7 +101,7 @@ export const Map = ({ currentLocation }) => {
 
         <div style={{ display: "flex", height: "100vh", width: "100%" }}>
           <MapContainer center={[latitud, longitud]}
-            zoom={latitud && longitud ? 15 : 2} style={{ flex: "1" }} zoomControl={false}>
+            zoom={latitud && longitud ? 5 : 2} style={{ flex: "1" }} zoomControl={false} maxZoom={13} minZoom={2}>
             <TileLayer
           url={!darkMode ? "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"}
           attribution={!darkMode ? "&copy; OpenStreetMap contributors" : "&copy; CartoDB"}

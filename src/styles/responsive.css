@@ -14,8 +14,17 @@
         width: 60ch;
         margin-left: -10%
     }
-    #containerLanding{
-        position: fixed;
+    .image-container img{
+        width: 60vh !important; 
+        height: 30vh !important;
+    }
+    .overlay{
+        width: 60vh !important; 
+        height: 30vh !important;
+    }
+    .overlay-text{
+        margin-right: 25% !important;
+        font-size: 18px;
     }
     #textLanding{
         font-size: 18px;
@@ -32,9 +41,6 @@
     }
     #titles{
         font-size: 50px;
-    }
-    .image-container{
-        margin-left: 20%;
     }
     .containerAnimals{
         overflow: scroll;

@@ -26,12 +26,12 @@ export const HeatMap = ({ currentLocation }) => {
   }, []);
 
   const getColorByCount = (count) => {
-    if (count >= 30) {
-      return darkMode ? "purple" : "darkred"; // Más de 5 animales
-    } else if (count >= 15) {
-      return darkMode ? "pink" : "orange"; // Entre 3 y 4 animales
+    if (count >= 50) {
+      return darkMode ? "purple" : "darkred";
+    } else if (count >= 30) {
+      return darkMode ? "pink" : "orange";
     } else {
-      return darkMode ? "blue" : "yellow"; // Menos de 3 animales
+      return darkMode ? "blue" : "yellow";
     }
   };
 
@@ -73,28 +73,40 @@ export const HeatMap = ({ currentLocation }) => {
   return (
     <>
       <Sidebar onToggleDarkMode={handleToggleDarkMode} />
-      <div  style={{ padding: '10px', textAlign: 'center', backgroundColor: 'white', boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.2)' }}>
-          <div className="gap-5" style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
-              <div style={{ width: '20px', height: '20px', backgroundColor: 'red', marginRight: '10px' }}></div>
-              Más de 30 animales
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
-              <div style={{ width: '20px', height: '20px', backgroundColor: 'orange', marginRight: '10px' }}></div>
-              Entre 15 y 29 animales
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <div style={{ width: '20px', height: '20px', backgroundColor: 'yellow', marginRight: '10px' }}></div>
-              Menos de 15 animales
-            </div>
+      <div style={{ padding: '10px', textAlign: 'center', backgroundColor: darkMode ? "black" : "white", boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.2)' }}>
+        <div className="gap-5" style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
+            <div style={{ width: '20px', height: '20px', backgroundColor: darkMode ? "purple" : "darkred", marginRight: '10px', color: darkMode ? "white" : "black" }}></div>
+            <span style={{
+              color: darkMode ? "white" : "black"
+            }}>
+              Más de 50 animales
+            </span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
+            <div style={{ width: '20px', height: '20px', backgroundColor: darkMode ? "pink" : "orange", marginRight: '10px', color: darkMode ? "white" : "black" }}></div>
+            <span style={{
+              color: darkMode ? "white" : "black"
+            }}>
+              Entre 30 a 50 animales
+            </span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ width: '20px', height: '20px', backgroundColor: darkMode ? "blue" : "yellow", marginRight: '10px', color: darkMode ? "white" : "black" }}></div>
+            <span style={{
+              color: darkMode ? "white" : "black"
+            }}>
+              Menos de 30 animales
+            </span>
           </div>
         </div>
+      </div>
       <div style={{ height: '100vh' }}>
-        <MapContainer center={[currentLocation.latitud, currentLocation.longitud]} zoom={2} zoomControl={false} style={{ height: '100%' }}>
-        <TileLayer
-          url={!darkMode ? "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"}
-          attribution={!darkMode ? "&copy; OpenStreetMap contributors" : "&copy; CartoDB"}
-        />
+        <MapContainer center={[currentLocation.latitud, currentLocation.longitud]} zoom={2} maxZoom={13} minZoom={2} zoomControl={false} style={{ height: '100%' }}>
+          <TileLayer
+            url={!darkMode ? "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"}
+            attribution={!darkMode ? "&copy; OpenStreetMap contributors" : "&copy; CartoDB"}
+          />
 
           {Object.entries(countAnimalsByRegion()).map(([region, data], index) => {
             const { count, coordinates } = data;
@@ -104,7 +116,7 @@ export const HeatMap = ({ currentLocation }) => {
               <CircleMarker
                 key={index}
                 center={coordinates}
-                radius={80}
+                radius={100}
                 pathOptions={{ color, opacity: 0.7, fillOpacity: 0.5 }}
               >
                 <Tooltip>{`${region}: ${count} animal(es)`}</Tooltip>
@@ -112,9 +124,9 @@ export const HeatMap = ({ currentLocation }) => {
             );
           })}
         </MapContainer>
-        
+
       </div>
-      
+
     </>
   );
 };
