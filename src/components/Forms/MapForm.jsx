@@ -25,7 +25,7 @@ function DrawLayer({ onMarkerAdd }) {
   return null;
 }
 
-export const MapForm = ({ onLatLngChange }) => {
+export const MapForm = ({ onLatLngChange, darkMode }) => {
   const [marker, setMarker] = useState(null);
 
   const handleMarkerAdd = (marker) => {
@@ -40,7 +40,10 @@ export const MapForm = ({ onLatLngChange }) => {
 
   return (
     <MapContainer center={[0, 0]} zoom={3} style={{ height: '200px', width: '300px' }}>
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+       <TileLayer
+          url={!darkMode ? "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"}
+          attribution={!darkMode ? "&copy; OpenStreetMap contributors" : "&copy; CartoDB"}
+        />
       <DrawLayer onMarkerAdd={handleMarkerAdd} />
       {marker && <Marker position={marker.getLatLng()} icon={MyIcon} />}
     </MapContainer>

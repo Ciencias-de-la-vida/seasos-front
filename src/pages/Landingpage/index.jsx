@@ -31,8 +31,8 @@ export default function LandingpagePage() {
                 El Tesoro de <br />la Vida Marina
               </Heading>
               <Text size="s" as="p" className="w-[43%] ml-[7px] z-[1]" id="textLanding">
-                Sumérgete en el fascinante mundo de los océanos a través de nuestra plataforma dedicada a la conciencia y
-                conservación de la vida marina.
+                Sumérgete en el fascinante mundo de los océanos a través de nuestra plataforma dedicada a la conciencia, 
+                conservación e información de la vida marina. 
               </Text>
               <div className="flex flex-row justify-between items-start w-[98%] mt-2 ml-[7px]">
                 <Link to="/map" style={{ textDecoration: "none" }}>
@@ -46,8 +46,7 @@ export default function LandingpagePage() {
                           Unete
                         </Heading>
                         <Text as="p">
-                          Forma parte de este gran proyecto para proteger la vida marina por medio de herramientas web y
-                          tecnologías digitales.
+                          Forma parte y ayudanos a recopilar mucha más información de las especies marinas en peligro de extinción
                         </Text>
                       </div>
                     </div>
@@ -59,7 +58,7 @@ export default function LandingpagePage() {
                       rightIcon={<Img src="images/img_group_4.svg" alt="Group 4" />}
                       className="w-full gap-[15px] mt-[-02%]"
                     >
-                      Participa Aquí
+                      Registrate Aquí
                     </Button>
                   </Link>
                 </div>
@@ -78,7 +77,7 @@ export default function LandingpagePage() {
         </div>
         <div className="row mt-4 mb-3">
             <Heading size="md" as="h2" className="w-[100%] text-center text-black" id="titles">
-              Animales Registrados
+              Animales Marinos Registrados
             </Heading>
           </div>
         <div className='container mb-3' id='animals'>

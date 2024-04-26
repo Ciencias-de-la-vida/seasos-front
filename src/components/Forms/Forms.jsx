@@ -123,7 +123,8 @@ export const Form = () => {
           const alert = Swal.fire({
             icon: 'success',
             title: 'Éxito',
-            text: 'Petición enviada',
+            text: 'Petición enviada \n En los proximos dias los administradores aprobaran o rechazaran tu petición!',
+            showConfirmButton: true
           });
           if(alert.isConfirmed()){
             vaciarInputs()
@@ -182,7 +183,7 @@ export const Form = () => {
                         Latitud y Longitud
                       </label>
                       <div className='container'>
-                        <MapForm onLatLngChange={handleLatLngChange} />
+                        <MapForm onLatLngChange={handleLatLngChange} darkMode={darkMode} />
                       </div>
                     </div>
                   </div>

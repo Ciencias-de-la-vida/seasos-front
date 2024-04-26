@@ -25,8 +25,8 @@ export const Sidebar = ({ onToggleDarkMode }) => {
         localStorage.getItem('darkMode') === 'true'
     );
 
-    const handleHomeClick = (item) => {
-        if (isLogged && item === 'Home') {
+    const handleHomeClick = () => {
+        if (isLogged) {
             localStorage.clear();
         }
     };
@@ -35,11 +35,11 @@ export const Sidebar = ({ onToggleDarkMode }) => {
         const newDarkMode = !darkMode;
         setDarkMode(newDarkMode);
         localStorage.setItem('darkMode', newDarkMode);
-        
+
     };
 
     useEffect(() => {
-        onToggleDarkMode(darkMode); 
+        onToggleDarkMode(darkMode);
     }, [darkMode, onToggleDarkMode]);
 
     return (
@@ -64,7 +64,7 @@ export const Sidebar = ({ onToggleDarkMode }) => {
                 <nav>
                     {isLogged ? (
                         navItemsAdmin.map((item, index) => (
-                            <Link to={navLinksAdmin[index]} className={`mt-4 ${darkMode ? 'button-link' : 'button-link2'}`} key={item}>
+                            <Link to={navLinksAdmin[index]} className={`mt-4 ${darkMode ? 'button-link' : 'button-link2'} ${window.location.pathname === navLinksAdmin[index] ? 'selected' : ''}`} key={item}>
                                 <button type='button' onClick={() => handleHomeClick(item)}>
                                     <span className='icon'>
                                         <i className={`${navIconsAdmin[index]} ${darkMode ? textLightClass : textDarkClass} mx-[1vh]`}></i>
@@ -88,43 +88,43 @@ export const Sidebar = ({ onToggleDarkMode }) => {
 
                 </nav>
                 <div className="bottom-section mt-[30vh]">
-    <div className="dark-mode-container mx-3">
-        {isOpen ? (
-            <div className='d-flex mt-[40vh]'>
-                <i className={`fa fa-moon mx-2 ${darkMode ? textLightClass : textDarkClass}`}></i>
-                <span className={`mt-[-0.5vh] ${darkMode ? textLightClass : textDarkClass}`}>Dark</span>
-                <Switch
-                    className='mx-3 mt-[-0.7vh]'
-                    checked={darkMode}
-                    onChange={toggleDarkMode}
-                    isSelected={darkMode}
-                />
-            </div>
-        ) : (
-            <div className='mt-[35vh]'>
-                <i className={`fa fa-moon mx-[1vh] ${darkMode ? textLightClass : textDarkClass}`}></i>
-                <Switch
-                    className='mx-[-1.5vh] mt-[1vh]'
-                    checked={darkMode}
-                    onChange={toggleDarkMode}
-                    isSelected={darkMode}
-                    style={{ transform: 'scale(0.6)' }}
-                />
-            </div>
-        )}
-         
-    </div>
-    <div className="home-container">
-    <Link to="/" className={`mt-3 ${darkMode ? 'button-link' : 'button-link2'}`}>
-                                <button type='button' className='btnO' onClick={() => handleHomeClick(item = "Home")} style={{ fontSize: "16px" }}>
-                                    <span className='icon'>
-                                        <i className={`fa fa-home mx-2 ${darkMode ? textLightClass : textDarkClass} mx-[1vh]`}></i>
-                                    </span>
-                                    {isOpen && <span className={darkMode ? textLightClass : textDarkClass}> Home </span>}
-                                </button>
-                            </Link>
-    </div>
-</div>
+                    <div className="dark-mode-container mx-3">
+                        {isOpen ? (
+                            <div className='d-flex mt-[40vh]'>
+                                <i className={`fa fa-moon mx-2 ${darkMode ? textLightClass : textDarkClass}`}></i>
+                                <span className={`mt-[-0.5vh] ${darkMode ? textLightClass : textDarkClass}`}>Dark</span>
+                                <Switch
+                                    className='mx-3 mt-[-0.7vh]'
+                                    checked={darkMode}
+                                    onChange={toggleDarkMode}
+                                    isSelected={darkMode}
+                                />
+                            </div>
+                        ) : (
+                            <div className='mt-[35vh]'>
+                                <i className={`fa fa-moon mx-[1vh] ${darkMode ? textLightClass : textDarkClass}`}></i>
+                                <Switch
+                                    className='mx-[-1.5vh] mt-[1vh]'
+                                    checked={darkMode}
+                                    onChange={toggleDarkMode}
+                                    isSelected={darkMode}
+                                    style={{ transform: 'scale(0.6)' }}
+                                />
+                            </div>
+                        )}
+
+                    </div>
+                    <div className="home-container">
+                        <Link to="/" className={`mt-3 ${darkMode ? 'button-link' : 'button-link2'}`}>
+                            <button type='button' className='btnO' onClick={() => handleHomeClick()} style={{ fontSize: "16px" }}>
+                                <span className='icon'>
+                                    <i className={`fa fa-home mx-2 ${darkMode ? textLightClass : textDarkClass} mx-[1vh]`}></i>
+                                </span>
+                                {isOpen && <span className={darkMode ? textLightClass : textDarkClass}> Home </span>}
+                            </button>
+                        </Link>
+                    </div>
+                </div>
 
             </div>
         </aside>

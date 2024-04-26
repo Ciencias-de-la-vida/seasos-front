@@ -86,9 +86,23 @@ export const Login = () => {
   const register = async (e) => {
     try {
       const { data } = await axios.post(`https://api-rest-python-six.vercel.app/post/users`, form)
-      alert(data.message)
+      if (data) {
+        const response = await Swal.fire({
+          icon: 'success',
+          title: 'Te registraste con exito!!',
+          text: 'La solicitud entrará en un proceso para admitirte...\n Ingresa en un periodo de 24 horas!',
+          showConfirmButton: true
+        });
+        if (response.isConfirmed) {
+          window.location.reload();
+        }
+      }
     } catch (err) {
-      alert(err.response.data.message)
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: err
+      });
     }
   }
 

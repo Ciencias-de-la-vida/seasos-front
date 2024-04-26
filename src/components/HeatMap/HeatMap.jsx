@@ -102,7 +102,12 @@ export const HeatMap = ({ currentLocation }) => {
         </div>
       </div>
       <div style={{ height: '100vh' }}>
-        <MapContainer center={[currentLocation.latitud, currentLocation.longitud]} zoom={2} maxZoom={13} minZoom={2} zoomControl={false} style={{ height: '100%' }}>
+        <MapContainer center={[currentLocation.latitud, currentLocation.longitud]} zoom={2} 
+        maxBounds={[
+          [-90, -180], // Coordenadas del suroeste
+          [90, 180], // Coordenadas del noreste
+        ]}
+        maxZoom={2} minZoom={2} zoomControl={false} style={{ height: '100%' }}>
           <TileLayer
             url={!darkMode ? "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"}
             attribution={!darkMode ? "&copy; OpenStreetMap contributors" : "&copy; CartoDB"}
@@ -116,7 +121,7 @@ export const HeatMap = ({ currentLocation }) => {
               <CircleMarker
                 key={index}
                 center={coordinates}
-                radius={100}
+                radius={150}
                 pathOptions={{ color, opacity: 0.7, fillOpacity: 0.5 }}
               >
                 <Tooltip>{`${region}: ${count} animal(es)`}</Tooltip>
