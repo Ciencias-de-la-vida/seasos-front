@@ -50,9 +50,15 @@
         font-size: 50px;
         width: 100%;
         text-align: center !important;
+        margin: 0
     }
     #rowAnimals{
-        width: 400px !important;
+        width: 380px !important;
+        margin: 0;
+    }
+    #animals{
+        width: 380px !important;
+        margin: 0;
     }
     .containerAnimals{
         overflow: scroll !important;
