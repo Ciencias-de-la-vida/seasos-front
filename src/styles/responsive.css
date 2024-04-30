@@ -1,6 +1,6 @@
 @media (max-width: 700px) {
     html {
-        overflow-x: hidden;
+        overflow-x: hidden !important;
       }
     .navbar-item {
         margin-right: 0; /* Ajustar el espaciado entre elementos en dispositivos pequeños */
@@ -18,20 +18,22 @@
         margin-left: -10%
     }
     .image-container img{
-        width: 60vh !important; 
-        height: 30vh !important;
+        width: 30vh !important; 
+        height: 20vh !important;
+        margin-left: auto;
+        margin-right: auto;
     }
     .overlay{
-        width: 60vh !important; 
-        height: 30vh !important;
+        width: 30vh !important; 
+        height: 20vh !important;
+        margin-left: 15% !important;
     }
     .overlay-text{
-        margin-right: 25% !important;
         font-size: 18px;
     }
     #textLanding{
         font-size: 18px;
-        width: 20ch;
+        width: 25ch;
         margin-right: 30%
     }
     #containerUnete{
@@ -46,8 +48,8 @@
         font-size: 50px;
     }
     .containerAnimals{
-        overflow: scroll;
-        height: 20vh;
+        overflow: scroll !important;
+        height: 20vh !important;
     }
     #inputSearch{
         display: none !important;
