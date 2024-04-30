@@ -1,10 +1,4 @@
 @media (max-width: 700px) {
-    html {
-        overflow-x: hidden !important;
-      }
-    body{
-        width: max-content;
-    }
     .navbar-item {
         margin-right: 0; /* Ajustar el espaciado entre elementos en dispositivos pequeños */
       }
