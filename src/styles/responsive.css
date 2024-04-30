@@ -2,6 +2,9 @@
     html {
         overflow-x: hidden !important;
       }
+    body{
+        width: max-content;
+    }
     .navbar-item {
         margin-right: 0; /* Ajustar el espaciado entre elementos en dispositivos pequeños */
       }
@@ -14,19 +17,18 @@
     }
     #titleLanding{
         font-size: 40px;
-        width: 60ch;
-        margin-left: -10%
+        width: 280px
     }
     .image-container img{
         width: 30vh !important; 
-        height: 20vh !important;
+        height: 25vh !important;
         margin-left: auto;
         margin-right: auto;
     }
     .overlay{
         width: 30vh !important; 
-        height: 20vh !important;
-        margin-left: 15% !important;
+        height: 25vh !important;
+        margin-left: 17% !important;
     }
     .overlay-text{
         font-size: 18px;
@@ -34,7 +36,7 @@
     #textLanding{
         font-size: 18px;
         width: 25ch;
-        margin-right: 30%
+        
     }
     #containerUnete{
         width:250px !important;
@@ -46,6 +48,11 @@
     }
     #titles{
         font-size: 50px;
+        width: 100%;
+        text-align: center !important;
+    }
+    #rowAnimals{
+        width: 400px !important;
     }
     .containerAnimals{
         overflow: scroll !important;

@@ -75,7 +75,7 @@ export default function LandingpagePage() {
             <Counters />
           </div>
         </div>
-        <div className="row mt-4 mb-3">
+        <div className="row mt-4 mb-3" id='rowAnimals'>
             <Heading size="md" as="h2" className="w-[100%] text-center text-black" id="titles">
               Animales Marinos Registrados
             </Heading>
