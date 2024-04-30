@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { Sidebar } from 'components/Nav/Sidebar';
 import { Heading } from 'components';
+import Swal from 'sweetalert2';
 
 export const UserTable = () => {
     const [users, setUsers] = useState([]);
@@ -10,7 +10,8 @@ export const UserTable = () => {
     const [darkMode, setDarkMode] = useState(false);
     const [editingUser, setEditingUser] = useState(null);
     const [showEditForm, setShowEditForm] = useState(false);
-    const itemsPerPage = 10; // Número de usuarios por página
+    const [showAddUserForm, setShowAddUserForm] = useState(false);
+    const itemsPerPage = 10;
 
     const getUsers = async () => {
         try {
@@ -29,7 +30,7 @@ export const UserTable = () => {
         try {
             const newStatus = !currentStatus;
             await axios.put(`https://api-rest-python-six.vercel.app/update/users/${id}`, { status: newStatus });
-            getUsers(); // Reload animals after update
+            getUsers();
         } catch (error) {
             console.error('Error toggling status:', error);
         }
@@ -37,8 +38,28 @@ export const UserTable = () => {
 
     const deleteUser = async (id) => {
         try {
-            await axios.delete(`https://api-rest-python-six.vercel.app/delete/users/${id}`);
-            getUsers(); // Recargar usuarios después de eliminar
+            // Show confirmation dialog
+            const result = await Swal.fire({
+                title: "Deseas eliminar este registro?",
+                text: "No será posible revertir esta acción!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si, elimínalo!"
+            });
+
+            // If confirmed, proceed with deletion
+            if (result.isConfirmed) {
+                await axios.delete(`https://api-rest-python-six.vercel.app/delete/users/${id}`);
+                getUsers();
+                // Show success message
+                Swal.fire({
+                    title: "Eliminado!",
+                    text: "Tu registro se ha eliminado exitosamente",
+                    icon: "success"
+                });
+            }
         } catch (error) {
             console.error('Error deleting user:', error);
         }
@@ -63,12 +84,10 @@ export const UserTable = () => {
         getUsers();
     }, []);
 
-    // Cálculo de índices de inicio y fin para la página actual
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const currentUsers = users.slice(startIndex, endIndex);
 
-    // Controladores de paginación
     const totalPages = Math.ceil(users.length / itemsPerPage);
 
     const handlePrevPage = () => {
@@ -89,10 +108,13 @@ export const UserTable = () => {
                 <div className="col-md-2">
                     <Sidebar onToggleDarkMode={handleToggleDarkMode} />
                 </div>
-                <div className="col-md-10" id='containerTable'>
-                    <Heading size="md" as="h2" className="text-center text-black mt-3 mb-2" id="titleAnimals">
+                <div className="col-md-10 ">
+                    <Heading size="md" as="h2" className="text-center text-black mt-3 mb-2">
                         Usuarios Registrados
                     </Heading>
+                    <div className=" text-end">
+                        <button className="btn btn-primary" onClick={() => setShowAddUserForm(true)}>Agregar Usuario</button>
+                    </div>
                     <div className="table-container">
                         <table className="table table-striped">
                             <thead>
@@ -100,6 +122,7 @@ export const UserTable = () => {
                                     <th>Nombre</th>
                                     <th>Apellido</th>
                                     <th>Correo</th>
+                                    <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -133,7 +156,7 @@ export const UserTable = () => {
                             <button onClick={handlePrevPage} disabled={currentPage === 1}>
                                 <h3><i className="bi bi-arrow-left-square"></i></h3>
                             </button>
-                            <Heading size="xs" as="h2" className="w-[20%] text-center text-black mt-1 mb-2" id="paginacion">
+                            <Heading size="xs" as="h2" className="w-[20%] text-center text-black mt-1 mb-2">
                                 Página {currentPage} de {totalPages}
                             </Heading>
                             <button onClick={handleNextPage} disabled={currentPage === totalPages}>
@@ -148,8 +171,15 @@ export const UserTable = () => {
                             onClose={() => setShowEditForm(false)}
                         />
                     )}
+                    {showAddUserForm && (
+                        <AddUserForm
+                            onClose={() => setShowAddUserForm(false)}
+                            getUsers={getUsers}
+                        />
+                    )}
                 </div>
             </div>
+
         </div>
     );
 };
@@ -172,8 +202,7 @@ const EditForm = ({ user, onSubmit, onClose }) => {
     };
 
     return (
-        
-        <div className="container fixed z-50 inset-0 overflow-y-auto" style={{backgroundColor: "white"}}>   
+        <div className="container fixed z-50 inset-0 overflow-y-auto" style={{ backgroundColor: "white" }}>
             <div className="edit-form ">
                 <h2>Editar Usuario</h2>
                 <form onSubmit={handleSubmit}>
@@ -196,6 +225,67 @@ const EditForm = ({ user, onSubmit, onClose }) => {
                 </form>
             </div>
         </div>
-  
+
+    );
+};
+
+const AddUserForm = ({ onClose, getUsers }) => {
+    const [newUserData, setNewUserData] = useState({
+        nombre: '',
+        apellido: '',
+        correo: '',
+        contraseña: ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setNewUserData({ ...newUserData, [name]: value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.post('https://api-rest-python-six.vercel.app/post/users', {
+                nombre: newUserData.nombre,
+                apellido: newUserData.apellido,
+                correo: newUserData.correo,
+                contrasena: newUserData.contraseña // Ajusta aquí
+            });
+            onClose();
+            getUsers();
+        } catch (error) {
+            console.error('Error adding user:', error);
+        }
+    };
+    
+
+    return (
+        <div className="container fixed z-50 inset-0 overflow-y-auto" style={{ backgroundColor: "white" }}>
+            <div className="add-user-form">
+                <h2>Agregar Usuario</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-3">
+                        <label htmlFor="nombre" className="form-label">Nombre</label>
+                        <input type="text" className="form-control" id="nombre" name="nombre" value={newUserData.nombre} onChange={handleChange} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="apellido" className="form-label">Apellido</label>
+                        <input type="text" className="form-control" id="apellido" name="apellido" value={newUserData.apellido} onChange={handleChange} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="correo" className="form-label">Correo</label>
+                        <input type="email" className="form-control" id="correo" name="correo" value={newUserData.correo} onChange={handleChange} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="contraseña" className="form-label">Contraseña</label>
+                        <input type="password" className="form-control" id="contraseña" name="contraseña" value={newUserData.contraseña} onChange={handleChange} />
+                    </div>
+                    <div className="text-end">
+                        <button type="button" className="btn btn-secondary me-2" onClick={onClose}>Cancelar</button>
+                        <button type="submit" className="btn btn-primary">Agregar Usuario</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     );
 };

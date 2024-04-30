@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Sidebar } from 'components/Nav/Sidebar';
 import { Heading } from 'components';
+import Swal from 'sweetalert2';
 
 export const AnimalTable = () => {
     const [animals, setAnimals] = useState([]);
@@ -37,8 +38,28 @@ export const AnimalTable = () => {
 
     const deleteAnimal = async (id) => {
         try {
-            await axios.delete(`https://api-rest-python-six.vercel.app/delete/animals/${id}`);
-            getAnimals(); // Reload animals after deletion
+            // Show confirmation dialog
+            const result = await Swal.fire({
+                title: "Deseas eliminar este registro?",
+                text: "No será posible revertir esta acción!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si, elimínalo!"
+            });
+
+            // If confirmed, proceed with deletion
+            if (result.isConfirmed) {
+                await axios.delete(`https://api-rest-python-six.vercel.app/delete/animals/${id}`);
+                getAnimals(); // Reload animals after deletion
+                // Show success message
+                Swal.fire({
+                    title: "Eliminado!",
+                    text: "Tu registro se ha eliminado exitosamente",
+                    icon: "success"
+                });
+            }
         } catch (error) {
             console.error('Error deleting animal:', error);
         }
