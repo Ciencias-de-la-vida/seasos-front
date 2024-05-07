@@ -148,22 +148,22 @@ export const Form = () => {
   return (
     <>
       <Sidebar onToggleDarkMode={handleToggleDarkMode} />
-      <div id='containerF' style={backgroundImageStyle}>
-      <div className='container' >
+      <div id='containerF'  style={backgroundImageStyle}>
+      <div className='container'  >
       <div className='row justify-content-center'>
-          <div className='col-lg-8'>
+          <div className='col-lg-8' >
             <div className='card my-2 rounded-3' style={{ width: '80vh', backgroundColor: darkMode ? "black": "white" }}>
               <img
                 src= {darkMode ? 'https://images.pexels.com/photos/1618606/pexels-photo-1618606.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' : 'https://images.pexels.com/photos/986805/pexels-photo-986805.jpeg'}
                 className='card-img-top rounded-top'
                 alt='Sample photo'
               />
-              <Heading size="xs" as="h2" className="w-[100%] text-center mt-3 mb-2" style={{fontSize: "25px", color: darkMode? "white": "black"}}>
+              <Heading size="xs" as="h2" className="w-[100%] text-center mt-3 mb-2" id="soliTitle" style={{fontSize: "25px", color: darkMode? "white": "black"}}>
                         Solicitud de animal
                     </Heading>
               <div className='card-body px-5'>
-              
-                <form>
+              <div className="container">
+                <form id='form'>
                   <div className='row mb-3'>
                     <div className='col'>
                       <input type='text' className='form-control' id='form1' placeholder='Nombre del animal' required />
@@ -222,6 +222,7 @@ export const Form = () => {
                     </button>
                   </div>
                 </form>
+                </div>
               </div>
             </div>
           </div>

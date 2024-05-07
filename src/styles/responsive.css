@@ -61,6 +61,16 @@
     #inputSearch{
         display: none !important;
     }
+    #containerF{
+        padding: 5vh;
+    }
+    #form{
+        width: 60% !important;
+        margin-left: 20%;
+    }
+    #soliTitle{
+        margin-left: 07%;
+    }
     .form-box{
         width: 85% !important;
         margin-left: 06%;

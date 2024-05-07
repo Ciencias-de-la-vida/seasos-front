@@ -133,3 +133,10 @@ input{
     max-height: 0;
     overflow: hidden;
 }
+
+.inputClassPagination{
+    width: 80px !important;
+    text-align: right !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+}

@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 export const AnimalTable = () => {
     const [animals, setAnimals] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [inputPage, setInputPage] = useState(1); 
     const [darkMode, setDarkMode] = useState(false);
     const [editingAnimal, setEditingAnimal] = useState(null);
     const [showEditForm, setShowEditForm] = useState(false);
@@ -104,6 +105,20 @@ export const AnimalTable = () => {
         }
     };
 
+    const handleInputChange = (e) => {
+        let value = parseInt(e.target.value);
+        if (!isNaN(value)) {
+            // Verificar que el valor esté dentro del rango válido
+            value = Math.min(Math.max(value, 1), totalPages);
+            setInputPage(value);
+        }
+    };
+
+    const handleInputBlur = () => {
+        // Actualizar la página actual cuando el input pierde el foco
+        setCurrentPage(inputPage);
+    };
+
     return (
         <div className="container">
             <div className="row">
@@ -157,8 +172,24 @@ export const AnimalTable = () => {
                             <button onClick={handlePrevPage} disabled={currentPage === 1}>
                                 <h3><i className="bi bi-arrow-left-square"></i></h3>
                             </button>
+                            <input
+                                className='inputClassPagination'
+                                type="number"
+                                min="1"
+                                max={totalPages}
+                                value={inputPage}
+                                onChange={handleInputChange}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        handleInputChange(e);
+                                        e.target.blur(); // Desenfocar el input después de presionar Enter
+                                    }
+                                }}
+                                onBlur={handleInputBlur}
+                                style={{ width: "80px", textAlign: "right" }}
+                            />
                             <Heading size="xs" as="h2" className="w-[20%] text-center text-black mt-1 mb-2" id="paginacion">
-                                Página {currentPage} de {totalPages}
+                                de {totalPages}
                             </Heading>
                             <button onClick={handleNextPage} disabled={currentPage === totalPages}>
                                 <h3><i className="bi bi-arrow-right-square"></i></h3>
