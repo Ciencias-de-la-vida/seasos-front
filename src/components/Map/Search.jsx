@@ -12,6 +12,8 @@ export const Search = ({ location }) => {
   const [showPopover, setShowPopover] = useState(false);
   const [resultadoCards, setResultadoCards] = useState([]);
   const [target, setTarget] = useState(null)
+  const [searchTimer, setSearchTimer] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,27 +36,43 @@ export const Search = ({ location }) => {
 
   const handleSearchChange = async (e) => {
     const value = e.target.value;
-    console.log(value);
     setAnimal(value);
-    if (value.length >= 4) {
-      try {
-        const results = await axios.get(`https://api-rest-python-six.vercel.app/get/animals/${animal}`);
-        setResultadoCards(results);
-        setShowPopover(false)
-        if (results.data) {
-          setResultado(results.data);
-          setTarget(e.target)
-          setShowPopover(true)
-        }
-      } catch (error) {
-        console.log(error);
-        setResultado([]);
-        setShowPopover(false);
-      }
-    } else {
-      setShowPopover(false)
+
+    // Limpiamos el temporizador si ya hay uno activo
+    if (searchTimer) {
+        clearTimeout(searchTimer);
     }
-  }
+
+    // Creamos un nuevo temporizador
+    const timer = setTimeout(async () => {
+        try {
+            const results = await axios.get(`https://api-rest-python-six.vercel.app/get/animals/${value}`);
+            setResultadoCards(results);
+            setShowPopover(false);
+            if (results.data) {
+                setResultado(results.data);
+                setTarget(e.target);
+                setShowPopover(true);
+            }
+        } catch (error) {
+            console.log(error);
+            setResultado([]);
+            setShowPopover(false);
+        }
+    }, 500); // Espera 500ms después de la última escritura para realizar la solicitud
+
+    // Guardamos el temporizador en el estado
+    setSearchTimer(timer);
+};
+
+useEffect(() => {
+    // Limpiamos el temporizador al desmontar el componente
+    return () => {
+        if (searchTimer) {
+            clearTimeout(searchTimer);
+        }
+    };
+}, []);
 
 
   return (
