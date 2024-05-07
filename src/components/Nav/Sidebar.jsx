@@ -26,9 +26,7 @@ export const Sidebar = ({ onToggleDarkMode }) => {
     );
 
     const handleHomeClick = () => {
-        if (isLogged) {
             localStorage.clear();
-        }
     };
 
     const toggleDarkMode = () => {
