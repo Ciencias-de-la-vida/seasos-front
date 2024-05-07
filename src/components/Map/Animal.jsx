@@ -114,7 +114,7 @@ export const Animal = () => {
               <div className="bg-gray-300 h-3 w-100 mb-2"></div>
             </div>
             ) : (
-              <p style={{ color: 'white', fontSize: "15px", fontWeight: "bold", textAlign: "justify", marginTop: "10px" }}>
+              <p style={{ color: 'white', fontSize: "15px", fontWeight: "200", textAlign: "justify", marginTop: "10px" }}>
                 {result}
               </p>
             )}
@@ -135,7 +135,7 @@ export const Animal = () => {
             ) : (
               <>
                 {result2 && result2.length > 0 ? (
-                  <ul style={{ color: 'black', fontSize: "15px", fontWeight: "bold", textAlign: "justify", marginTop: "10px", paddingLeft: "20px" }}>
+                  <ul style={{ color: 'black', fontSize: "15px", fontWeight: "200", textAlign: "justify", marginTop: "10px", paddingLeft: "20px" }}>
                     {result2.map((item, index) => (
                       <li key={index} style={{ marginBottom: "10px" }}>{item}</li>
                     ))}
@@ -161,7 +161,7 @@ export const Animal = () => {
               <div className="bg-gray-300 h-3 w-100 mb-2"></div>
             </div>
             ) : (
-              <p style={{ color: 'white', fontSize: "15px", fontWeight: "bold", textAlign: "justify", marginTop: "10px" }}>
+              <p style={{ color: 'white', fontSize: "15px", fontWeight: "200", textAlign: "justify", marginTop: "10px" }}>
                 {result3}
               </p>
             )}

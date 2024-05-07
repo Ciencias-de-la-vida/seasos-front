@@ -65,7 +65,7 @@ export const Sidebar = ({ onToggleDarkMode }) => {
                     {isLogged ? (
                         navItemsAdmin.map((item, index) => (
                             <Link to={navLinksAdmin[index]} className={`mt-4 ${darkMode ? 'button-link' : 'button-link2'} ${window.location.pathname === navLinksAdmin[index] ? 'selected' : ''}`} key={item}>
-                                <button type='button' onClick={() => handleHomeClick(item)}>
+                                <button type='button'>
                                     <span className='icon'>
                                         <i className={`${navIconsAdmin[index]} ${darkMode ? textLightClass : textDarkClass} mx-[1vh]`}></i>
                                     </span>

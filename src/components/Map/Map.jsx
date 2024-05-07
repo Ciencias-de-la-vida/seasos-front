@@ -106,7 +106,7 @@ export const Map = ({ currentLocation }) => {
               [90, 180], // Coordenadas del noreste
             ]}
             maxBoundsViscosity={1.0} 
-            zoomControl={false} maxZoom={13} minZoom={2}>
+            zoomControl={false} maxZoom={15} minZoom={2}>
             <TileLayer
           url={!darkMode ? "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"}
           attribution={!darkMode ? "&copy; OpenStreetMap contributors" : "&copy; CartoDB"}
