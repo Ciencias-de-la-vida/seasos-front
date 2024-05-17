@@ -52,7 +52,7 @@ export const Contact = () => {
     <Toaster className="mx-4" richColors expand={true} />
         <div className="row">
             <div className="col-12 col-md-7">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full mt-2">
         <h2 className="text-4xl font-bold text-center text-blue-900 mb-2 mt-2">Contáctanos</h2>
         <p className="text-center text-blue-600 mb-8">¡Si tienes alguna duda acerca de nosotros!</p>
         <form className="space-y-4" ref={form} onSubmit={handleSubmit}>
