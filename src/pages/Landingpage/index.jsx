@@ -6,6 +6,7 @@ import { Counters } from "pages/Counters";
 import { Animals } from "pages/Animals";
 import { NavbarLanding } from "pages/Nav";
 import { Contact } from "pages/Contact";
+import { Reference } from "pages/Reference";
 
 
 export default function LandingpagePage() {
@@ -86,6 +87,12 @@ export default function LandingpagePage() {
         </div>
         <div className='mb-3 w-full max-w-[100%] pb-12' id='contact' style={{ backgroundColor: "#0a2747" }}>
           <Contact />
+        </div>
+        <div className='mb-3 w-full max-w-[100%] pb-12 pt-4' id='refes'>
+        <Heading size="md" as="h2" className="w-full text-center text-black mb-2 mt-2" id="titles">
+        Referencias
+      </Heading>
+          <Reference/>
         </div>
       </div>
     </>

@@ -35,6 +35,11 @@ export const NavbarLanding = () => {
             Contacto
           </ScrollLink>
         </NavbarItem>
+        <NavbarItem>
+          <ScrollLink to="refes" spy={true} smooth={true} duration={500} className="text-white" style={{textDecoration: "none", fontWeight:"bold", fontSize: "20px", cursor: "pointer"}}>
+            Referencias
+          </ScrollLink>
+        </NavbarItem>
       </NavbarContent>
     </Navbar>
   );

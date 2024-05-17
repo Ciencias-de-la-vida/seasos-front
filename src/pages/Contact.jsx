@@ -80,12 +80,12 @@ export const Contact = () => {
             onChange={handleChange}
             required></textarea>
           </div>
-          <button type="submit" className="w-full bg-blue-700 text-white py-2 rounded-lg hover:bg-blue-800 transition duration-300">Enviar</button>
+          <button type="submit" className="w-full bg-blue-700 text-white py-2 rounded-lg hover:bg-blue-800 transition duration-300"> <i className='fa fa-send me-2'></i> Enviar</button>
         </form>
       </div>
       </div>
       <div className="col-12 col-md-5 mt-2">
-      <img src="https://images.pexels.com/photos/3354346/pexels-photo-3354346.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Imagen marina" className="rounded-lg shadow-lg" style={{height: "99%" }} />
+      <img src="https://images.pexels.com/photos/3354346/pexels-photo-3354346.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Imagen marina" className="rounded-lg shadow-lg" style={{height: "100%" }} />
       </div>
       </div>
     </div>

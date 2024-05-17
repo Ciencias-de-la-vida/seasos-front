@@ -137,7 +137,7 @@ export const AnimalTable = () => {
     };
 
     return (
-        <div style={{ backgroundColor: darkMode ? "#4A5858" : "white", paddingBottom: "10%" }} >
+        <div style={{ backgroundColor: darkMode ? "#1E1E1E" : "white", paddingBottom: "10%" }} >
             <div className="container" >
                 <div className="row">
                     <div className="col-md-2">

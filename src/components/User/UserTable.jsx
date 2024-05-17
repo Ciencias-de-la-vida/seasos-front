@@ -128,7 +128,7 @@ export const UserTable = () => {
   };
 
   return (
-    <div className="pb-5" style={{ backgroundColor: darkMode ? "#4A5858" : "white" }} >
+    <div className="pb-5" style={{ backgroundColor: darkMode ? "#1E1E1E" : "white" }} >
       <div className="container">
         <div className="row">
           <div className="col-md-2">
