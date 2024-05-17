@@ -90,5 +90,15 @@
     #infoColors{
         display: inline-block !important;
     }
+    .sectionAnimals{
+        width:80%;
+        margin-left: 20%;
+    }
+    .animal-image{
+        width: 300px;
+    }
+    #containerImagen{
+        flex-direction: column;
+    }
   }
  

@@ -148,18 +148,22 @@ export const HeatMap = ({ currentLocation }) => {
           })}
         </MapContainer>
       </div>
- <Modal show={showModal} onHide={handleCloseModal} centered>
+      <Modal show={showModal} onHide={handleCloseModal} centered>
         <Modal.Header closeButton>
-          <Modal.Title style={{fontSize: "28px"}}>Animales de la región</Modal.Title>
+          <Modal.Title style={{ fontSize: "28px", textAlign: "center", width: "100%" }}>Animales de la región</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ maxHeight: '400px', overflowY: 'auto' }}>
-          {selectedRegionAnimals && selectedRegionAnimals.map((animal, index) => (
-            <div key={index} className="mb-3">
-              <img src={animal.img} alt={animal.nombre} style={{ width: "80%" }} />
-              <p className="mt-2 text-black">{animal.nombre}</p>
-              <p className="mb-5 text-black" style={{fontStyle: "italic", marginTop: "-15px"}}>{animal.cientifico}</p>
-            </div>
-          ))}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            {selectedRegionAnimals && selectedRegionAnimals.map((animal, index) => (
+              <div key={index} className="mb-3" style={{ textAlign: "center", width: "100%" }}>
+                <div className="d-flex align-items-center justify-content-center">
+                <img src={animal.img} alt={animal.nombre} style={{ width: "80%" }} />
+                </div>
+                <p className="mt-2 text-black">{animal.nombre}</p>
+                <p className="mb-5 text-black" style={{ fontStyle: "italic", marginTop: "-15px" }}>{animal.cientifico}</p>
+              </div>
+            ))}
+          </div>
         </Modal.Body>
       </Modal>
     

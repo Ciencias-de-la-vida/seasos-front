@@ -80,30 +80,31 @@ export const Animal = () => {
   }, [id]);
 
   return (
-    <div className='container mb-5'>
+    <div className='pb-4' style={{ backgroundColor: darkMode ? "#1E1E1E" : "white" }}>
+    <div className='container mb-5'  >
       <Sidebar onToggleDarkMode={handleToggleDarkMode} />
       <div className="row">
       <div className=""></div>
       <div className="col-md-12 d-flex align-items-center justify-content-center" >
-        <div className="container mt-5 d-flex align-items-center justify-content-center">
+        <div className="container mt-5 d-flex align-items-center justify-content-center" id='containerImagen'>
             <div className="">
               <div className="animal-image">
                 <img src={animal?.img} alt="..." />
               </div>
               </div>
               <div style={{marginLeft: "10%"}}>
-                <h2 className="mt-4" style={{ color: 'black', fontSize: "35px", fontWeight: "900", textAlign: "center", width: "15ch" }}>{animal?.nombre}</h2>
-                <p className="mt-2" style={{ color: 'gray', fontSize: "20px", fontWeight: "400", textAlign: "center",  }}>
+                <h2 className="mt-4" style={{ color: darkMode ? "white" : "black", fontSize: "35px", fontWeight: "900", textAlign: "center", width: "15ch" }}>{animal?.nombre}</h2>
+                <p className="mt-2" style={{ color: darkMode ? "whitesmoke" : "gray", fontSize: "20px", fontStyle:"italic", textAlign: "center",  }}>
                 Cientifico: {animal?.cientifico}
                 </p>
-                <p className='mt-2' style={{ color: 'gray', fontSize: "15px", fontWeight: "400", textAlign: "center"}}>
+                <p className='mt-2' style={{ color: darkMode ? "whitesmoke" : "gray", fontSize: "15px", fontWeight: "400", textAlign: "center"}}>
                 Region: {animal?.region}
                 </p>
               </div>
           </div>
         </div>
-        <div className="col-md-8 mt-5 text-center" style={{ marginLeft: "20%" }}>
-          <section style={{ backgroundColor: !darkMode ? "#1589e2 ": "#0a2747", padding: "40px" }}>
+        <div className="col-md-6 mt-5 text-center">
+          <section className='sectionAnimals' style={{ backgroundColor: !darkMode ? "#1589e2 ": "#0a2747", padding: "40px" }}>
             <Heading size="sm" as="h2" style={{ color: !darkMode ? "white" : "white", fontSize: "25px", fontWeight: "bold", textAlign: "center", marginTop: "10px" }}>
               Descripción
             </Heading>
@@ -121,8 +122,8 @@ export const Animal = () => {
           </section>
         </div>
         
-        <div className="col-md-8 mt-3 text-center" style={{ marginLeft: "20%" }}>
-          <section style={{ backgroundColor: "#fff", padding: "20px" }}>
+        <div className="col-md-6 mt-3 text-center">
+          <section className='sectionAnimals' style={{ backgroundColor: "#fff", padding: "20px" }}>
             <Heading size="sm" as="h2" className="text-dark" style={{ color: 'black', fontSize: "25px", fontWeight: "bold", textAlign: "center", marginTop: "10px" }}>
               Factores de riesgo
             </Heading>
@@ -149,8 +150,8 @@ export const Animal = () => {
             )}
           </section>
         </div>
-        <div className="col-md-8 mt-5 text-center" style={{ marginLeft: "20%" }}>
-          <section style={{ backgroundColor: !darkMode ? "#81c4f8":"#0f3e6b", padding: "40px" }}>
+        <div className="col-md-6 mt-5 text-center">
+          <section className='sectionAnimals' style={{ backgroundColor: !darkMode ? "#81c4f8":"#0f3e6b", padding: "40px" }}>
             <Heading size="sm" as="h2" style={{ color: !darkMode ? "white" : "white", fontSize: "25px", fontWeight: "bold", textAlign: "center", marginTop: "10px" }}>
               Extinción (aproximado)
             </Heading>
@@ -168,6 +169,7 @@ export const Animal = () => {
           </section>
         </div>
       </div>
+    </div>
     </div>
   );
 }
