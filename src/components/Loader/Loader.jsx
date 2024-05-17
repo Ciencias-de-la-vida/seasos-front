@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import img from "../../assets/images/Logo.png"
 function Loader() {
   const [loading, setLoading] = useState(true);
 
@@ -8,7 +8,7 @@ function Loader() {
       
       <div className="w-28 h-28 absolute z-10">
         <img
-          src="/src/assets/images/Logo.png"
+          src={img}
           alt="Logo de delfín"
           className="w-full h-full object-cover rounded-full"
         />

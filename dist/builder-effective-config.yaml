@@ -1,0 +1,10 @@
+directories:
+  output: dist
+  buildResources: assets
+appId: com.mi-aplicacion.electron
+files:
+  - filter:
+      - dist/**/*
+      - electron.js
+      - preload.js
+electronVersion: 30.0.6

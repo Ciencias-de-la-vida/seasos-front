@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Plot from 'react-plotly.js';
 import { Sidebar } from "../Nav/Sidebar";
-import { getLineChartFromFirebase } from "../Charts/firebaseStats";
+// import { getLineChartFromFirebase } from "../Charts/firebaseStats";
 import { Heading } from '..';
 
 
@@ -346,9 +346,9 @@ export const Stats = () => {
               }
             }}
         />
-<div className="container">
+{/* <div className="container">
 <getLineChartFromFirebase></getLineChartFromFirebase>
-</div>
+</div> */}
         </div>
     </div>
     
