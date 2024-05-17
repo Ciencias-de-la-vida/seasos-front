@@ -9,11 +9,11 @@ import { Heading } from '..';
 import { Switch } from '@nextui-org/react';
 
 const navItems = ['Mapa', 'HeatMap', 'Sugiere'];
-const navItemsAdmin = ['Usuarios', 'Animales'];
+const navItemsAdmin = ['Usuarios', 'Animales', 'Charts'];
 const navLinks = ['/map', '/heatmap', '/form'];
-const navLinksAdmin = ['/userT', '/animalT'];
-const navIcons = ['fa fa-map mx-2', 'fa fa-fire mx-2', 'fa fa-fish mx-2'];
-const navIconsAdmin = ['fa fa-user mx-2', 'fa fa-fish mx-2'];
+const navLinksAdmin = ['/userT', '/animalT', "/stats"];
+const navIcons = ['fa fa-map mx-2', 'fa fa-fire mx-2', 'fa fa-fish mx-2',];
+const navIconsAdmin = ['fa fa-user mx-2', 'fa fa-fish mx-2', "fa fa-signal mx-2"];
 const textLightClass = 'text-white';
 const textDarkClass = 'text-black';
 
@@ -41,7 +41,7 @@ export const Sidebar = ({ onToggleDarkMode }) => {
     }, [darkMode, onToggleDarkMode]);
 
     return (
-        <aside className={`sidebarPr ${isOpen ? 'open' : ''} ${!darkMode ? 'bg-white' : 'bg-black'}`}>
+        <aside className={`sidebarPr ${isOpen ? 'open' : ''} ${!darkMode ? 'bg-slate-150' : 'bg-black'}`}>
             <div className='inner'>
                 <header>
                     <button type='button' className='sidebar-burger' onClick={() => setIsOpen(!isOpen)}>
@@ -85,7 +85,7 @@ export const Sidebar = ({ onToggleDarkMode }) => {
                     )}
 
                 </nav>
-                <div className="bottom-section mt-[30vh]">
+                <div className="bottom-section mt-[35vh]">
                     <div className="dark-mode-container mx-3">
                         {isOpen ? (
                             <div className='d-flex mt-[40vh]'>

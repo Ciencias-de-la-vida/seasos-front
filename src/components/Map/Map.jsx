@@ -140,7 +140,7 @@ export const Map = ({ currentLocation }) => {
                     </h1>
                     <div className="d-flex justify-content-center align-items-center"><img src={marker.img} alt={marker.img} title={marker.country} style={{ width: "300px" }} />
                     </div>
-                    <p className="text-center" style={{ fontSize: "12px" }}><strong>Nombre Cientifico:</strong> {marker.cientifico}</p>
+                    <p className="text-center" style={{ fontSize: "12px", fontStyle: "italic" }}><strong>Nombre Cientifico:</strong> {marker.cientifico}</p>
                     <div className="d-flex justify-content-center align-items-center">
                       <a className="btn btn-primary"
                         onClick={(event) => {

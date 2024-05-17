@@ -10,6 +10,7 @@ import { AnimalTable } from "components/Animal/AnimalTable";
 import { UserTable } from "components/User/UserTable";
 import { UpdateAnimal } from "components/Forms/UpdateAnimal";
 import { UpdateUser } from "components/Forms/UpdateUser";
+import { Stats } from "components/Charts/stats";
 
 
 const ProjectRoutes = () => {
@@ -51,7 +52,8 @@ const ProjectRoutes = () => {
     { path: "/userT", element: <UserTable/>},
     { path: "/updateAnimal", element: <UpdateAnimal/>},
     { path: "/updateUser", element: <UpdateUser/>},
-    { path: "/heatmap", element: currentLocation ? <HeatMap currentLocation={currentLocation} /> : <h1>Por favor, activa la opción de ubicación</h1>}
+    { path: "/heatmap", element: currentLocation ? <HeatMap currentLocation={currentLocation} /> : <h1>Por favor, activa la opción de ubicación</h1>},
+    { path: "/stats", element: <Stats/>}
   ]);
 
   return element;

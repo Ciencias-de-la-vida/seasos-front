@@ -8,11 +8,28 @@ import Swal from 'sweetalert2';
 export const AnimalTable = () => {
     const [animals, setAnimals] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [inputPage, setInputPage] = useState(1); 
+    const [inputPage, setInputPage] = useState(0);
     const [darkMode, setDarkMode] = useState(false);
     const [editingAnimal, setEditingAnimal] = useState(null);
     const [showEditForm, setShowEditForm] = useState(false);
     const itemsPerPage = 10; // Número de animales por página
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
+        if (searchTerm.length <= 1) {
+            getAnimals();
+        }
+    };
+
+    useEffect(() => {
+        const filteredAnimals = animals.filter(animal => animal.nombre.toLowerCase().includes(searchTerm.toLowerCase()));
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const currentAnimals = filteredAnimals.slice(startIndex, endIndex);
+        setAnimals(filteredAnimals);
+    }, [searchTerm]);
+
 
     const getAnimals = async () => {
         try {
@@ -120,89 +137,98 @@ export const AnimalTable = () => {
     };
 
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-2">
-                    <Sidebar onToggleDarkMode={handleToggleDarkMode} />
-                </div>
-                <div className="col-md-10" id='containerTable'>
-                    <Heading size="md" as="h2" className="w-[100%] text-center text-black mt-3 mb-2" id="titleAnimals">
-                        Animales Registrados
-                    </Heading>
-                    <div className="table-responsive">
-                        <table className="table table-striped text-center">
-                            <thead>
-                                <tr>
-                                    <th>Img</th>
-                                    <th>Nombre</th>
-                                    <th>Científico</th>
-                                    <th>Latitud</th>
-                                    <th>Longitud</th>
-                                    <th>Región</th>
-                                    <th>Estatus</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {currentAnimals.map(animal => (
-                                    <tr key={animal._id}>
-                                        <td><img src={animal.img} alt={animal.nombre} style={{ width: "150px", borderRadius: "10px" }} /></td>
-                                        <td>{animal.nombre}</td>
-                                        <td>{animal.cientifico}</td>
-                                        <td>{animal.latitud}</td>
-                                        <td>{animal.longitud}</td>
-                                        <td>{animal.region}</td>
-                                        <td>
-                                            <button
-                                                className={`btn ${animal.status ? 'btn-success' : 'btn-danger'}`}
-                                                onClick={() => toggleStatus(animal._id, animal.status)}
-                                            >
-                                                {animal.status ? 'Activo' : 'Inactivo'}
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button className="btn btn-warning me-2" onClick={() => editAnimal(animal)}>Editar</button>
-                                            <button className="btn btn-danger" onClick={() => deleteAnimal(animal._id)}>Eliminar</button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                        <div className='d-flex align-items-center justify-content-center gap-2 mb-5'>
-                            <button onClick={handlePrevPage} disabled={currentPage === 1}>
-                                <h3><i className="bi bi-arrow-left-square"></i></h3>
-                            </button>
-                            <input
-                                className='inputClassPagination'
-                                type="number"
-                                min="1"
-                                max={totalPages}
-                                value={inputPage}
-                                onChange={handleInputChange}
-                                onKeyDown={(e) => {
-                                    if (e.key === 'Enter') {
-                                        handleInputChange(e);
-                                        e.target.blur(); // Desenfocar el input después de presionar Enter
-                                    }
-                                }}
-                                onBlur={handleInputBlur}
-                                style={{ width: "80px", textAlign: "right" }}
-                            />
-                            <Heading size="xs" as="h2" className="w-[20%] text-center text-black mt-1 mb-2" id="paginacion">
-                                de {totalPages}
-                            </Heading>
-                            <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-                                <h3><i className="bi bi-arrow-right-square"></i></h3>
-                            </button>
-                        </div>
+        <div style={{ backgroundColor: darkMode ? "#4A5858" : "white", paddingBottom: "10%" }} >
+            <div className="container" >
+                <div className="row">
+                    <div className="col-md-2">
+                        <Sidebar onToggleDarkMode={handleToggleDarkMode} />
                     </div>
-                    {showEditForm && (
-                        <EditForm
-                            animal={editingAnimal}
-                            onSubmit={handleEditFormSubmit}
-                            onClose={() => setShowEditForm(false)}
-                        />
-                    )}
+                    <div className="col-md-10" id='containerTable'>
+                        <Heading size="md" as="h2" className="w-[100%] text-center mt-3 mb-2" id="titleAnimals" style={{ color: darkMode ? "white" : "black" }}>
+                            Animales Registrados
+                        </Heading>
+                        <div className="row">
+                            <input
+                                type="text"
+                                placeholder="Buscar por nombre..."
+                                className="form-control mb-3"
+                                value={searchTerm}
+                                onChange={handleSearchChange}
+                                style={{ color: darkMode ? "black" : "black" }}
+                            />
+                        </div>
+                        <div className="table-responsive" >
+                            <table className={`table table-hover  ${!darkMode ? "table-striped" : "table-striped table-dark"} text-center `} style={{ width: "100%" }} >
+                                <thead>
+                                    <tr style={{ color: darkMode ? "white" : "black" }}>
+                                        <th>Img</th>
+                                        <th>Nombre</th>
+                                        <th>Científico</th>
+                                        <th>Región</th>
+                                        <th>Estatus</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {currentAnimals.map(animal => (
+                                        <tr key={animal._id}>
+                                            <td><img src={animal.img} alt={animal.nombre} style={{ width: "80%", height: "auto", borderRadius: "10px" }} /></td>
+                                            <td style={{ color: darkMode ? "white" : "black" }}>{animal.nombre}</td>
+                                            <td style={{ color: darkMode ? "white" : "black" }}>{animal.cientifico}</td>
+                                            <td style={{ color: darkMode ? "white" : "black" }}>{animal.region}</td>
+                                            <td>
+                                                <button
+                                                    className={`btn ${animal.status ? 'btn-success' : 'btn-danger'}`}
+                                                    onClick={() => toggleStatus(animal._id, animal.status)}
+                                                >
+                                                    {animal.status ? 'Activo' : 'Inactivo'}
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button className="btn btn-warning me-2 mb-3" onClick={() => editAnimal(animal)}>Editar</button>
+                                                <button className="btn btn-danger" onClick={() => deleteAnimal(animal._id)}>Eliminar</button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            <div className='d-flex align-items-center justify-content-center gap-2 mb-5'>
+                                <button onClick={handlePrevPage} disabled={currentPage === 1}>
+                                    <h3><i className="bi bi-arrow-left-square" style={{ color: darkMode ? "white" : "black" }}></i></h3>
+                                </button>
+                                <input
+                                    className='inputClassPagination'
+                                    type="number"
+                                    max={totalPages}
+                                    value={inputPage} // Establecer el valor como inputPage
+                                    onChange={(e) => {
+                                        let value = parseInt(e.target.value);
+                                        if (!isNaN(value)) {
+                                            // Verificar que el valor esté dentro del rango válido
+                                            value = Math.min(Math.max(value, 0), totalPages);
+                                            setCurrentPage(value); // Actualizar currentPage
+                                            setInputPage(value); // Actualizar inputPage
+                                        }
+                                    }}
+                                    onBlur={() => setCurrentPage(inputPage)} // Actualizar currentPage cuando el input pierde el foco
+                                    style={{ width: "80px", textAlign: "right", color: darkMode ? "white" : "black", fontWeight: "bolder", marginBottom: "6px" }}
+                                />
+                                <Heading size="xs" as="h2" className="w-[20%] text-center mt-1 mb-2" id="paginacion" style={{ color: darkMode ? "white" : "black" }}>
+                                    de {totalPages}
+                                </Heading>
+                                <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                                    <h3><i className="bi bi-arrow-right-square" style={{ color: darkMode ? "white" : "black" }}></i></h3>
+                                </button>
+                            </div>
+                        </div>
+                        {showEditForm && (
+                            <EditForm
+                                animal={editingAnimal}
+                                onSubmit={handleEditFormSubmit}
+                                onClose={() => setShowEditForm(false)}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
@@ -230,10 +256,10 @@ const EditForm = ({ animal, onSubmit, onClose }) => {
     };
 
     return (
-        <div className="container fixed z-50 inset-0 overflow-y-auto min-w-28" style={{backgroundColor: "white"}}>
+        <div className="container fixed z-50 inset-0 overflow-y-auto min-w-28" style={{ backgroundColor: "white" }}>
             <div className="edit-form  min-w-28">
                 <h2>Editar Animal</h2>
-                <form onSubmit={handleSubmit} className='' style={{width:"60vh"}}>
+                <form onSubmit={handleSubmit} className='' style={{ width: "60vh" }}>
                     <div className="mb-3">
                         <label htmlFor="nombre" className="form-label">Nombre</label>
                         <input type="text" className="form-control" id="nombre" name="nombre" value={editedAnimalData.nombre} onChange={handleChange} />

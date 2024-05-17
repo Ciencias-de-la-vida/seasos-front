@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { MapContainer, TileLayer, CircleMarker, Tooltip } from "react-leaflet";
+import { MapContainer, TileLayer, CircleMarker, Popup } from "react-leaflet";
 import { apiAnimals } from 'components/Map/apiAnimals';
 import { Sidebar } from "components/Nav/Sidebar";
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
+import { Modal } from "react-bootstrap";
 
 export const HeatMap = ({ currentLocation }) => {
   const [animals, setAnimals] = useState([]);
   const [darkMode, setDarkMode] = useState(false);
+  const [selectedRegionAnimals, setSelectedRegionAnimals] = useState(null);
+  const [showModal, setShowModal] = useState(false)
 
   const handleToggleDarkMode = (newMode) => {
     setDarkMode(newMode);
   };
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,10 +48,12 @@ export const HeatMap = ({ currentLocation }) => {
       if (region) {
         if (regionCounts[region]) {
           regionCounts[region].count += 1;
+          regionCounts[region].animals.push(animal); // Añadir el animal a la lista de la región
         } else {
           regionCounts[region] = {
             count: 1,
-            coordinates: [latitud, longitud], // Asigna las coordenadas de la región
+            coordinates: [latitud, longitud], // Asignar las coordenadas de la región
+            animals: [animal], // Inicializar la lista de animales de la región
           };
         }
       }
@@ -70,6 +76,14 @@ export const HeatMap = ({ currentLocation }) => {
     }
   };
 
+  const handleCloseModal = () => {
+    setShowModal(false); // Cerrar la modal
+  };
+
+  const handleShowAnimals = (regionAnimals) => {
+    setSelectedRegionAnimals(regionAnimals);
+    setShowModal(true); // Abrir la modal
+  };
   return (
     <>
       <Sidebar onToggleDarkMode={handleToggleDarkMode} />
@@ -102,12 +116,12 @@ export const HeatMap = ({ currentLocation }) => {
         </div>
       </div>
       <div style={{ height: '100vh' }}>
-        <MapContainer center={[currentLocation.latitud, currentLocation.longitud]} zoom={2} 
-        maxBounds={[
-          [-90, -180], // Coordenadas del suroeste
-          [90, 180], // Coordenadas del noreste
-        ]}
-        maxZoom={2} minZoom={2} zoomControl={false} style={{ height: '100%' }}>
+        <MapContainer center={[currentLocation.latitud, currentLocation.longitud]} zoom={2}
+          maxBounds={[
+            [-90, -180], // Coordenadas del suroeste
+            [90, 180], // Coordenadas del noreste
+          ]}
+          maxZoom={2} minZoom={2} zoomControl={false} style={{ height: '100%' }}>
           <TileLayer
             url={!darkMode ? "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"}
             attribution={!darkMode ? "&copy; OpenStreetMap contributors" : "&copy; CartoDB"}
@@ -124,14 +138,31 @@ export const HeatMap = ({ currentLocation }) => {
                 radius={150}
                 pathOptions={{ color, opacity: 0.7, fillOpacity: 0.5 }}
               >
-                <Tooltip>{`${region}: ${count} animal(es)`}</Tooltip>
-              </CircleMarker>
-            );
+                <Popup
+                >
+                      <h3 className="text-center mb-3">{`${region}: ${count} animal(es)`}</h3>
+                        <button className="btn btn-primary" onClick={() => handleShowAnimals(data.animals)}>Ver los animales de esta región</button>
+                </Popup>
+            </CircleMarker>
+            )
           })}
         </MapContainer>
-
       </div>
-
+ <Modal show={showModal} onHide={handleCloseModal} centered>
+        <Modal.Header closeButton>
+          <Modal.Title style={{fontSize: "28px"}}>Animales de la región</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{ maxHeight: '400px', overflowY: 'auto' }}>
+          {selectedRegionAnimals && selectedRegionAnimals.map((animal, index) => (
+            <div key={index} className="mb-3">
+              <img src={animal.img} alt={animal.nombre} style={{ width: "80%" }} />
+              <p className="mt-2 text-black">{animal.nombre}</p>
+              <p className="mb-5 text-black" style={{fontStyle: "italic", marginTop: "-15px"}}>{animal.cientifico}</p>
+            </div>
+          ))}
+        </Modal.Body>
+      </Modal>
+    
     </>
   );
 };

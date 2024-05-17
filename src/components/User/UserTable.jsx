@@ -128,119 +128,122 @@ export const UserTable = () => {
   };
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-md-2">
-          <Sidebar onToggleDarkMode={handleToggleDarkMode} />
-        </div>
-        <div className="col-md-10 ">
-          <Heading
-            size="md"
-            as="h2"
-            className="text-center text-black mt-3 mb-2"
-          >
-            Usuarios Registrados
-          </Heading>
-          <div className=" text-end">
-            <button
-              className="btn btn-dark"
-              onClick={() => setShowAddUserForm(true)}
-            >
-              Agregar Usuario
-            </button>
+    <div className="pb-5" style={{ backgroundColor: darkMode ? "#4A5858" : "white" }} >
+      <div className="container">
+        <div className="row">
+          <div className="col-md-2">
+            <Sidebar onToggleDarkMode={handleToggleDarkMode} />
           </div>
-          <div className="table-container">
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>Correo</th>
-                  <th>Estado</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentUsers.map((user, index) => (
-                  <tr key={index}>
-                    <td>{user.nombre}</td>
-                    <td>{user.apellido}</td>
-                    <td>{user.correo}</td>
-                    <td>
-                      <button
-                        className={`btn ${
-                          user.status ? "btn-success" : "btn-danger"
-                        }`}
-                        onClick={() => toggleStatus(user._id, user.status)}
-                      >
-                        {user.status ? "Activo" : "Inactivo"}
-                      </button>
-                    </td>
-                    <td>
-                      <button
-                        className="btn btn-warning me-2"
-                        onClick={() => editUser(user)}
-                      >
-                        Editar
-                      </button>
-                      <button
-                        className="btn btn-danger"
-                        onClick={() => deleteUser(user._id)}
-                      >
-                        Eliminar
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className="d-flex align-items-center justify-content-center gap-2 mb-5">
-              <button onClick={handlePrevPage} disabled={currentPage === 1}>
-                <h3>
-                  <i className="bi bi-arrow-left-square"></i>
-                </h3>
-              </button>
-              <input
-                className="inputClassPagination"
-                type="number"
-                min="1"
-                max={totalPages}
-                value={inputPage}
-                onChange={handleInputChange}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleInputChange(e);
-                    e.target.blur(); // Desenfocar el input después de presionar Enter
-                  }
-                }}
-                onBlur={handleInputBlur}
-                style={{ width: "80px", textAlign: "right" }}
-              />
-              <Heading
-                size="xs"
-                as="h2"
-                className="w-[20%] text-center text-black mt-1 mb-2"
-                id="paginacion"
-              >
-                de {totalPages}
-              </Heading>
+          <div className="col-md-10 ">
+            <Heading
+              size="md"
+              as="h2"
+              className="text-center mt-3 mb-2"
+              style={{ color: darkMode ? "white" : "black" }}
+            >
+              Usuarios Registrados
+            </Heading>
+            <div className=" text-end">
               <button
-                onClick={handleNextPage}
-                disabled={currentPage === totalPages}
+                className="btn btn-dark mb-3"
+                onClick={() => setShowAddUserForm(true)
+                }
               >
-                <h3>
-                  <i className="bi bi-arrow-right-square"></i>
-                </h3>
+                Agregar Usuario
               </button>
             </div>
+            <div className="table-container">
+              <table className={`table table-hover  ${!darkMode ? "table-striped" : "table-striped table-dark"} text-center`} >
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentUsers.map((user, index) => (
+                    <tr key={index}>
+                      <td>{user.nombre}</td>
+                      <td>{user.apellido}</td>
+                      <td>{user.correo}</td>
+                      <td>
+                        <button
+                          className={`btn ${user.status ? "btn-success" : "btn-danger"
+                            }`}
+                          onClick={() => toggleStatus(user._id, user.status)}
+                        >
+                          {user.status ? "Activo" : "Inactivo"}
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          className="btn btn-warning me-2"
+                          onClick={() => editUser(user)}
+                        >
+                          Editar
+                        </button>
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => deleteUser(user._id)}
+                        >
+                          Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div className="d-flex align-items-center justify-content-center gap-2 mb-5">
+                <button onClick={handlePrevPage} disabled={currentPage === 1}>
+                  <h3>
+                    <i className="bi bi-arrow-left-square" style={{ color: darkMode ? "white" : "black" }}></i>
+                  </h3>
+                </button>
+                <input
+                  className='inputClassPagination'
+                  type="number"
+                  max={totalPages}
+                  value={inputPage} // Establecer el valor como inputPage
+                  onChange={(e) => {
+                    let value = parseInt(e.target.value);
+                    if (!isNaN(value)) {
+                      // Verificar que el valor esté dentro del rango válido
+                      value = Math.min(Math.max(value, 0), totalPages);
+                      setCurrentPage(value); // Actualizar currentPage
+                      setInputPage(value); // Actualizar inputPage
+                    }
+                  }}
+                  onBlur={() => setCurrentPage(inputPage)} // Actualizar currentPage cuando el input pierde el foco
+                  style={{ width: "80px", textAlign: "right", color: darkMode ? "white" : "black", fontWeight: "bolder", marginBottom: "6px" }}
+                />
+                <Heading
+                  size="xs"
+                  as="h2"
+                  className="w-[20%] text-center mt-1 mb-2"
+                  id="paginacion"
+                  style={{ width: "80px", textAlign: "right", color: darkMode ? "white" : "black" }}
+                >
+                  de {totalPages}
+                </Heading>
+                <button
+                  onClick={handleNextPage}
+                  disabled={currentPage === totalPages}
+                >
+                  <h3><i className="bi bi-arrow-right-square" style={{ color: darkMode ? "white" : "black" }}></i></h3>
+                </button>
+              </div>
+            </div>
+            {showEditForm && (
+              <EditForm
+                user={editingUser}
+                onSubmit={handleEditFormSubmit}
+                onClose={() => setShowEditForm(false)}
+              />
+            )}
           </div>
-          {showEditForm && (
-            <EditForm
-              user={editingUser}
-              onSubmit={handleEditFormSubmit}
-              onClose={() => setShowEditForm(false)}
-            />
-          )}
         </div>
       </div>
     </div>

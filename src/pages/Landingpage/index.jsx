@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Counters } from "pages/Counters";
 import { Animals } from "pages/Animals";
 import { NavbarLanding } from "pages/Nav";
+import { Contact } from "pages/Contact";
 
 
 export default function LandingpagePage() {
@@ -82,6 +83,9 @@ export default function LandingpagePage() {
           </div>
         <div className='container mb-3' id='animals'>
           <Animals />
+        </div>
+        <div className='mb-3 w-full max-w-[100%] pb-12' id='contact' style={{ backgroundColor: "#0a2747" }}>
+          <Contact />
         </div>
       </div>
     </>

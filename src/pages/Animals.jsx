@@ -18,7 +18,7 @@ export const Animals = () => {
     }, []);
 
     return (
-        <div>
+        <div className='mb-1' style={{overflow: "scroll", height: "400px"}}>
             <MDBRow className="mb-4 mt-3" style={{ minHeight: "60vh" }}>
                 {listaAnimales?.map((item, index) => (
                     <MDBCol key={index} lg={2} md={6} sm={6} xs={6} className='mb-4 mb-lg-2' id='containerAnimals'>
