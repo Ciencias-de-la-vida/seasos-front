@@ -10,11 +10,11 @@ export const NavbarLanding = () => {
     <Navbar id='navbarLanding' className="flex-wrap">
       <NavbarBrand className="flex items-center">
         <Img src={img} alt="Brand Logo" className="h-12 w-12 mr-2 mt-1" />
-        <Heading size="sm" as="h3" className="font-bold text-white mt-3" style={{fontSize: "25px"}}>
+        <Heading size="sm" as="h3" className="font-bold text-white mt-2" style={{fontSize: "25px"}}>
           SEASOS
         </Heading>
       </NavbarBrand>
-      <NavbarContent justify='end' className="sm:hidden gap-5 mt-3">
+      <NavbarContent justify='end' className="sm:hidden gap-5 mt-2">
         <NavbarItem>
           <ScrollLink to="home" spy={true} smooth={true} duration={500} className="text-white" style={{textDecoration: "none", fontWeight:"bold", fontSize: "20px", cursor: "pointer"}}>
             Inicio
