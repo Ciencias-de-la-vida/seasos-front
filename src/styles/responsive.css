@@ -96,6 +96,7 @@
     }
     .animal-image{
         width: 300px;
+        margin-left: 10%;
     }
     #containerImagen{
         flex-direction: column;

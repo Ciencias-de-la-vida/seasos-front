@@ -30,9 +30,9 @@ export const HeatMap = ({ currentLocation }) => {
   }, []);
 
   const getColorByCount = (count) => {
-    if (count >= 50) {
+    if (count >= 70) {
       return darkMode ? "purple" : "darkred";
-    } else if (count >= 30) {
+    } else if (count >= 40) {
       return darkMode ? "pink" : "orange";
     } else {
       return darkMode ? "blue" : "yellow";
@@ -94,7 +94,7 @@ export const HeatMap = ({ currentLocation }) => {
             <span style={{
               color: darkMode ? "white" : "black"
             }}>
-              Más de 50 animales
+              Más de 70 animales
             </span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
@@ -102,7 +102,7 @@ export const HeatMap = ({ currentLocation }) => {
             <span style={{
               color: darkMode ? "white" : "black"
             }}>
-              Entre 30 a 50 animales
+              Entre 40 a 70 animales
             </span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -110,7 +110,7 @@ export const HeatMap = ({ currentLocation }) => {
             <span style={{
               color: darkMode ? "white" : "black"
             }}>
-              Menos de 30 animales
+              Menos de 40 animales
             </span>
           </div>
         </div>
