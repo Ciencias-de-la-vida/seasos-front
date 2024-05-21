@@ -151,7 +151,7 @@ export const AnimalTable = () => {
                             <input
                                 type="text"
                                 placeholder="Buscar por nombre..."
-                                className="form-control mb-3"
+                                className="input-field form-control mb-3"
                                 value={searchTerm}
                                 onChange={handleSearchChange}
                                 style={{ color: darkMode ? "black" : "black" }}
@@ -181,12 +181,13 @@ export const AnimalTable = () => {
                                                     className={`btn ${animal.status ? 'btn-success' : 'btn-danger'}`}
                                                     onClick={() => toggleStatus(animal._id, animal.status)}
                                                 >
-                                                    {animal.status ? 'Activo' : 'Inactivo'}
+                                                   <i className={`fa ${animal.status ? "fa-check-circle" : "fa-ban"
+                            } mx-2`}></i> {animal.status ? 'Activo' : 'Inactivo'}
                                                 </button>
                                             </td>
                                             <td>
-                                                <button className="btn btn-warning me-2 mb-3" onClick={() => editAnimal(animal)}>Editar</button>
-                                                <button className="btn btn-danger" onClick={() => deleteAnimal(animal._id)}>Eliminar</button>
+                                                <button className="btn btn-warning me-2 mb-3" onClick={() => editAnimal(animal)}><i className="fa fa-pen mx-2"></i>Editar</button>
+                                                <button className="btn btn-danger" onClick={() => deleteAnimal(animal._id)}><i className="fa fa-trash mx-2"></i>Eliminar</button>
                                             </td>
                                         </tr>
                                     ))}
@@ -262,31 +263,31 @@ const EditForm = ({ animal, onSubmit, onClose }) => {
                 <form onSubmit={handleSubmit} className='' style={{ width: "60vh" }}>
                     <div className="mb-3">
                         <label htmlFor="nombre" className="form-label">Nombre</label>
-                        <input type="text" className="form-control" id="nombre" name="nombre" value={editedAnimalData.nombre} onChange={handleChange} />
+                        <input type="text" className="input-field form-control" id="nombre" name="nombre" value={editedAnimalData.nombre} onChange={handleChange} />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="cientifico" className="form-label">Científico</label>
-                        <input type="text" className="form-control" id="cientifico" name="cientifico" value={editedAnimalData.cientifico} onChange={handleChange} />
+                        <input type="text" className=" input-field form-control" id="cientifico" name="cientifico" value={editedAnimalData.cientifico} onChange={handleChange} />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="latitud" className="form-label">Latitud</label>
-                        <input type="text" className="form-control" id="latitud" name="latitud" value={editedAnimalData.latitud} onChange={handleChange} />
+                        <input type="text" className="input-field form-control" id="latitud" name="latitud" value={editedAnimalData.latitud} onChange={handleChange} />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="longitud" className="form-label">Longitud</label>
-                        <input type="text" className="form-control" id="longitud" name="longitud" value={editedAnimalData.longitud} onChange={handleChange} />
+                        <input type="text" className="input-field form-control" id="longitud" name="longitud" value={editedAnimalData.longitud} onChange={handleChange} />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="region" className="form-label">Región</label>
-                        <input type="text" className="form-control" id="region" name="region" value={editedAnimalData.region} onChange={handleChange} />
+                        <input type="text" className="input-field form-control" id="region" name="region" value={editedAnimalData.region} onChange={handleChange} />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="img" className="form-label">Imagen</label>
-                        <input type="text" className="form-control" id="img" name="img" value={editedAnimalData.img} onChange={handleChange} />
+                        <input type="text" className="input-field form-control" id="img" name="img" value={editedAnimalData.img} onChange={handleChange} />
                     </div>
                     <div className="text-center">
-                        <button type="button" className="btn btn-secondary me-2" onClick={onClose}>Cancelar</button>
-                        <button type="submit" className="btn btn-primary">Guardar Cambios</button>
+                        <btn className="btn btn-secondary me-2" onClick={onClose}>Cancelar</btn>
+                        <btn type="submit" className="btn btn-primary">Guardar Cambios</btn>
                     </div>
                 </form>
             </div>

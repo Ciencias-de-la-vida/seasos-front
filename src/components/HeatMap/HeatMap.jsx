@@ -94,7 +94,7 @@ export const HeatMap = ({ currentLocation }) => {
             <span style={{
               color: darkMode ? "white" : "black"
             }}>
-              Más de 70 animales
+              Más de 70 especies
             </span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
@@ -102,7 +102,7 @@ export const HeatMap = ({ currentLocation }) => {
             <span style={{
               color: darkMode ? "white" : "black"
             }}>
-              Entre 40 a 70 animales
+              Entre 40 a 70 especies
             </span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -110,7 +110,7 @@ export const HeatMap = ({ currentLocation }) => {
             <span style={{
               color: darkMode ? "white" : "black"
             }}>
-              Menos de 40 animales
+              Menos de 40 especies
             </span>
           </div>
         </div>
@@ -140,8 +140,8 @@ export const HeatMap = ({ currentLocation }) => {
               >
                 <Popup
                 >
-                      <h3 className="text-center mb-3">{`${region}: ${count} animal(es)`}</h3>
-                        <button className="btn btn-primary" onClick={() => handleShowAnimals(data.animals)}>Ver los animales de esta región</button>
+                      <h3 className="text-center mb-3">{`${region}: ${count} especie(s)`}</h3>
+                        <button className="btn btn-primary" onClick={() => handleShowAnimals(data.animals)}>Ver las especies de esta región</button>
                 </Popup>
             </CircleMarker>
             )
@@ -150,7 +150,7 @@ export const HeatMap = ({ currentLocation }) => {
       </div>
       <Modal show={showModal} onHide={handleCloseModal} centered>
         <Modal.Header closeButton>
-          <Modal.Title style={{ fontSize: "28px", textAlign: "center", width: "100%" }}>Animales de la región</Modal.Title>
+          <Modal.Title style={{ fontSize: "28px", textAlign: "center", width: "100%" }}>Especies de la región</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ maxHeight: '400px', overflowY: 'auto' }}>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>

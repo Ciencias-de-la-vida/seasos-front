@@ -152,6 +152,19 @@ ul {
   border-radius: 5%;
 }
 
+#floating-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4CAF50; /* Color verde */
+  color: white;
+  padding: 15px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  z-index: 9999; /* Asegura que el botón esté encima de otros elementos */
+}
+
 .overlay {
   position: absolute;
   top: 0;

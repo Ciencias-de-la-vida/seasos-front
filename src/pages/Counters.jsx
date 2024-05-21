@@ -48,10 +48,10 @@ export const Counters = () => {
   return (
 <div id="cards-container">
           <div id="card" style={{ backgroundColor: "#003366", boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.479)", color: "white" }}>
-            <Counter count={endangeredAnimalsCount} label="Animales en peligro de extinción" />
+            <Counter count={endangeredAnimalsCount} label="Especies en peligro de extinción" />
           </div>
           <div id="card" style={{ backgroundColor: "#004080", boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.479)", color: "white" }}>
-            <Counter count={registeredAnimalsCount} label="Animales registrados" />
+            <Counter count={registeredAnimalsCount} label="Especies registrados" />
           </div>
           <div id="card" style={{ backgroundColor: "#004d99", boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.479)", color: "white" }}>
             <Counter count={appUsersCount} label="Usuarios registrados" />

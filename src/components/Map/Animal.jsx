@@ -103,7 +103,7 @@ export const Animal = () => {
               </div>
           </div>
         </div>
-        <div className="col-12 col-md-12 mt-5 text-center">
+        <div className="col-12 col-md-8 mt-5 text-center">
           <section className='sectionAnimals' style={{ backgroundColor: !darkMode ? "#1589e2 ": "#0a2747", padding: "40px" }}>
             <Heading size="sm" as="h2" style={{ color: !darkMode ? "white" : "white", fontSize: "25px", fontWeight: "bold", textAlign: "center", marginTop: "10px" }}>
               Descripción
@@ -122,7 +122,7 @@ export const Animal = () => {
           </section>
         </div>
         
-        <div className="col-12 col-md-12 mt-3 text-center">
+        <div className="col-12 col-md-8 mt-3 text-center">
           <section className='sectionAnimals' style={{ backgroundColor: "#fff", padding: "20px" }}>
             <Heading size="sm" as="h2" className="text-dark" style={{ color: 'black', fontSize: "25px", fontWeight: "bold", textAlign: "center", marginTop: "10px" }}>
               Factores de riesgo
@@ -150,7 +150,7 @@ export const Animal = () => {
             )}
           </section>
         </div>
-        <div className="col-12 col-md-12 mt-5 text-center">
+        <div className="col-12 col-md-8 mt-5 text-center">
           <section className='sectionAnimals' style={{ backgroundColor: !darkMode ? "#81c4f8":"#0f3e6b", padding: "40px" }}>
             <Heading size="sm" as="h2" style={{ color: !darkMode ? "white" : "white", fontSize: "25px", fontWeight: "bold", textAlign: "center", marginTop: "10px" }}>
               Extinción (aproximado)

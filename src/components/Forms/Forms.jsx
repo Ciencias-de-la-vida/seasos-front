@@ -54,8 +54,11 @@ export const Form = () => {
   };
 
   const vaciarInputs = () => {
-  window.location.reload()
-  }
+    document.getElementById('form').reset();
+    setLatLng(null);
+    setFile(null);
+    setImg("");
+  };
 
   const handleInputChange = (e) => {
     setInputType(e.target.value);
@@ -119,29 +122,28 @@ export const Form = () => {
       const { data } = await axios.post('https://api-rest-python-six.vercel.app/post/animals', newAnimal);
 
       if (data) {
-        if (data) {
-          const alert = Swal.fire({
-            icon: 'success',
-            title: 'Éxito',
-            text: 'Petición enviada \n En los proximos dias los administradores aprobaran o rechazaran tu petición!',
-            showConfirmButton: true
-          });
-          if(alert.isConfirmed()){
-            vaciarInputs()
-          }else{
-            vaciarInputs()
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Petición enviada \n En los proximos dias los administradores aprobaran o rechazaran tu petición!',
+          showConfirmButton: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            vaciarInputs();
+          } else {
+            vaciarInputs();
           }
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: data.message || 'Hubo un problema al enviar la petición',
-          });
-        }
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: data.message || 'Hubo un problema al enviar la petición',
+        });
       }
     } catch (error) {
       console.error(error);
-      vaciarInputs()
+      vaciarInputs();
     }
   };
 
@@ -159,14 +161,14 @@ export const Form = () => {
                 alt='Sample photo'
               />
               <Heading size="xs" as="h2" className="w-[100%] text-center mt-3 mb-2" id="soliTitle" style={{fontSize: "25px", color: darkMode? "white": "black"}}>
-                        Solicitud de animal
+                        Solicitud de nueva especie
                     </Heading>
               <div className='card-body px-5'>
               <div className="container">
                 <form id='form'>
                   <div className='row mb-3'>
                     <div className='col'>
-                      <input type='text' className='form-control' id='form1' placeholder='Nombre del animal' required />
+                      <input type='text' className='form-control' id='form1' placeholder='Nombre de la especie' required />
                     </div>
                     <div className='col'>
                       <input type='text' className='form-control' id='form2' placeholder='Nombre cientifico' required />
@@ -190,7 +192,7 @@ export const Form = () => {
                   <div className='row mb-3'>
                     <div className='col'>
                       <label htmlFor='form6' className='form-label' style={{color: darkMode ? "white":"black"}}>
-                        Imagen del animal
+                        Imagen de la especie
                       </label>
                       <select className='form-select mb-2' id='form6' onChange={handleInputChange}>
                         <option value='file'>Subir archivo</option>

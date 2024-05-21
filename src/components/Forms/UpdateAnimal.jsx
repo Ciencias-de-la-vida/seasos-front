@@ -64,28 +64,28 @@ export const UpdateAnimal =()=> {
             <MDBCardImage src='https://florayfaunamarina.com/wp-content/uploads/Flora-y-Fauna-marina.jpg' className='p-3 object-cover w-100 object-center'  alt="Sample photo"/>
             <MDBCardBody className='px-5'>
               <h3 className="mb-4 text-center">Actualización de datos</h3> 
-              <MDBInput wrapperClass='mb-4' placeholder="Nombre del animal" id='form1' type='text' defaultValue={datos.nombre} required/>
+              <MDBInput wrapperClass='mb-4' className='input-field' placeholder="Nombre del animal" id='form1' type='text' defaultValue={datos.nombre} required/>
               <MDBRow>
                 <MDBCol size='md'>
-                  <MDBInput wrapperClass=' mb-4' placeholder="Nombre cientifico del animal" id='form2' type='text' defaultValue={datos.cientifico} required/>
+                  <MDBInput wrapperClass=' mb-4' className='input-field' placeholder="Nombre cientifico del animal" id='form2' type='text' defaultValue={datos.cientifico} required/>
                 </MDBCol>
                 <MDBCol size='md'>
-                  <MDBInput wrapperClass='mb-4' placeholder="Región donde se ubica" id='form3' type='text' defaultValue={datos.region} required/>
+                  <MDBInput wrapperClass='mb-4' className='input-field' placeholder="Región donde se ubica" id='form3' type='text' defaultValue={datos.region} required/>
                 </MDBCol>
                 <MDBCol md='12'>
                   <h6>Latitud</h6>
-                  <MDBRange placeholder="Latitud donde se ubica" name="form4" id='form4' type='range' min="-90" max="90" step="0.0001" defaultValue={datos.latitud} required></MDBRange>
+                  <MDBRange placeholder="Latitud donde se ubica" className='input-field' name="form4" id='form4' type='range' min="-90" max="90" step="0.0001" defaultValue={datos.latitud} required></MDBRange>
                 </MDBCol>
                 <MDBCol md='12' className='gy-3'>
                   <h6>Longitud</h6>
-                  <MDBRange placeholder="Longitud donde se ubica" name="form5" id='form5' type='range' min="-180" max="180" step="0.0001" defaultValue={datos.longitud} required></MDBRange>
+                  <MDBRange placeholder="Longitud donde se ubica" className='input-field' name="form5" id='form5' type='range' min="-180" max="180" step="0.0001" defaultValue={datos.longitud} required></MDBRange>
                 </MDBCol>
                 <MDBCol md='12' className='gy-3'>
                   <h6 className='mb-2' /*Agregar el default value para la imagen*/>Imagen del animal</h6>
-                  <MDBFile accept='image/*' name="form6" id='form6'></MDBFile>
+                  <MDBFile accept='image/*' className='input-field' name="form6" id='form6'></MDBFile>
                 </MDBCol>
                 <MDBCol className="d-flex align-items-center justify-content-center">
-                    <button onClick={(e)=>updateAnimal(e)}>Actualizar</button>
+                    <button  onClick={(e)=>updateAnimal(e)}>Actualizar</button>
                 </MDBCol>
               </MDBRow>
             </MDBCardBody>

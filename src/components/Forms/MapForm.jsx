@@ -39,7 +39,13 @@ export const MapForm = ({ onLatLngChange, darkMode }) => {
   };
 
   return (
-    <MapContainer center={[0, 0]} zoom={3} style={{ height: '200px', width: '300px' }}>
+    <MapContainer center={[0, 0]} zoom={3} style={{ height: '300px', width: '400px' }} maxBounds={[
+      [-90, -180], // Coordenadas del suroeste
+      [90, 180], // Coordenadas del noreste
+    ]}
+    maxBoundsViscosity={1.0}
+    zoomControl={false}
+    minZoom={1}>
        <TileLayer
           url={!darkMode ? "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"}
           attribution={!darkMode ? "&copy; OpenStreetMap contributors" : "&copy; CartoDB"}

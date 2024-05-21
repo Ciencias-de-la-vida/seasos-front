@@ -134,24 +134,10 @@ export const UserTable = () => {
           <div className="col-md-2">
             <Sidebar onToggleDarkMode={handleToggleDarkMode} />
           </div>
-          <div className="col-md-10 ">
-            <Heading
-              size="md"
-              as="h2"
-              className="text-center mt-3 mb-2"
-              style={{ color: darkMode ? "white" : "black" }}
-            >
+          <div className="col-md-10 " id="containerTable">
+          <Heading size="md" as="h2" className="w-[100%] text-center mt-3 mb-2" id="titleAnimals" style={{ color: darkMode ? "white" : "black" }}>
               Usuarios Registrados
             </Heading>
-            <div className=" text-end">
-              <button
-                className="btn btn-dark mb-3"
-                onClick={() => setShowAddUserForm(true)
-                }
-              >
-                Agregar Usuario
-              </button>
-            </div>
             <div className="table-container">
               <table className={`table table-hover  ${!darkMode ? "table-striped" : "table-striped table-dark"} text-center`} >
                 <thead>
@@ -175,7 +161,8 @@ export const UserTable = () => {
                             }`}
                           onClick={() => toggleStatus(user._id, user.status)}
                         >
-                          {user.status ? "Activo" : "Inactivo"}
+                         <i className={`fa ${user.status ? "fa-check-circle" : "fa-ban"
+                            } mx-2`}></i> {user.status ? "Activo" : "Inactivo"}
                         </button>
                       </td>
                       <td>
@@ -183,13 +170,13 @@ export const UserTable = () => {
                           className="btn btn-warning me-2"
                           onClick={() => editUser(user)}
                         >
-                          Editar
+                          <i className="fa fa-pen mx-2"></i>Editar
                         </button>
                         <button
-                          className="btn btn-danger"
+                          className="btn btn-danger mt-2"
                           onClick={() => deleteUser(user._id)}
                         >
-                          Eliminar
+                          <i className="fa fa-trash mx-2"></i>Eliminar
                         </button>
                       </td>
                     </tr>

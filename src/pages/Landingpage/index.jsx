@@ -36,6 +36,7 @@ export default function LandingpagePage() {
                 Sumérgete en el fascinante mundo de los océanos a través de nuestra plataforma dedicada a la conciencia, 
                 conservación e información de la vida marina. 
               </Text>
+              <a href="https://firebasestorage.googleapis.com/v0/b/seasos-ciencias.appspot.com/o/win-unpacked.rar?alt=media&token=fa4f0143-8aae-4fe7-b0d7-9d84decb4d38" download id="floating-button"> <i className="fa fa-download"></i> Descarga aquí nuestro proyecto</a>
               <div className="flex flex-row justify-between items-start w-[98%] mt-2 ml-[7px]">
                 <Link to="/map" style={{ textDecoration: "none" }}>
                   <Button className="font-poppins min-w-[141px] mt-3" href="/map">Explora en el mapa</Button>
@@ -79,7 +80,7 @@ export default function LandingpagePage() {
         </div>
         <div className="row mt-4 mb-3" id='rowAnimals'>
             <Heading size="md" as="h2" className="w-[100%] text-center text-black" id="titles">
-              Animales Marinos Registrados
+              Especies Marinas Registradas
             </Heading>
           </div>
         <div className='container mb-3' id='animals'>
